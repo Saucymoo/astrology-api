@@ -1,66 +1,59 @@
-# Astrology Chart Generator
+# Astrology Chart API
 
 ## Overview
 
-This is a full-stack web application that generates personalized astrology charts based on user birth information. The application uses modern web technologies including React, TypeScript, Express.js, and Drizzle ORM with PostgreSQL for data persistence.
+This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data including planetary positions, houses, and key placements like Sun, Moon, and Rising signs.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Project Focus: Backend API for programmatic use, not web interface.
 
 ## System Architecture
 
-### Frontend Architecture
-- **React 18** with TypeScript for the user interface
-- **Vite** as the build tool and development server
-- **TanStack Query (React Query)** for server state management and API calls
-- **Wouter** for client-side routing (lightweight React Router alternative)
-- **Tailwind CSS** with **shadcn/ui** components for styling
-- **React Hook Form** with Zod validation for form handling
-
-### Backend Architecture
-- **Express.js** server with TypeScript
-- RESTful API design with `/api/astrology/chart` endpoints
-- In-memory storage implementation with interface for future database integration
+### Backend Architecture (Python FastAPI)
+- **FastAPI** framework with Python 3.11
+- **Pydantic** models for type safety and validation
+- **Uvicorn** ASGI server for high performance
+- RESTful API design with comprehensive endpoints
 - External API integration with Free Astrology API for chart calculations
 - Geocoding service integration using OpenStreetMap Nominatim API
+- Comprehensive error handling and logging
 
-### Data Storage Solutions
-- **Drizzle ORM** configured for PostgreSQL with schema definitions
-- **Neon Database** serverless PostgreSQL for production
-- In-memory storage fallback during development
-- Database migrations managed through Drizzle Kit
+### Legacy Frontend (Not Active)
+- Previous React/TypeScript frontend components remain but are not used
+- Focus shifted to standalone Python API for backend integration
 
 ## Key Components
 
-### Core Features
-1. **Birth Information Form** - Collects name, date, time, and location
-2. **Chart Generation** - Processes birth data and calls astrology API
-3. **Chart Display** - Renders planetary positions, houses, and astrological data
-4. **Responsive Design** - Mobile-first approach with Tailwind CSS
+### Core API Endpoints
+1. **POST /generate-chart** - Main endpoint for astrology chart generation
+2. **POST /geocode** - Location name to coordinates conversion
+3. **GET /health** - Health check and monitoring
+4. **GET /planets** - List of supported celestial bodies
+5. **GET /zodiac-signs** - List of zodiac signs
 
 ### API Integration
-- **Free Astrology API** for chart calculations
+- **Free Astrology API** for chart calculations and planetary positions
 - **OpenStreetMap Nominatim** for location geocoding
-- Error handling and validation for external service failures
+- Comprehensive error handling and validation
+- Automatic coordinate detection from location names
 
-### UI Components
-- Comprehensive shadcn/ui component library
-- Form components with validation feedback
-- Loading states and error handling
-- Toast notifications for user feedback
+### Data Models
+- **BirthInfoRequest**: Validated birth information input
+- **AstrologyResponse**: Complete chart with planets, houses, ascendant
+- **Planet**: Individual planetary position and attributes
+- **House**: Astrological house cusp information
+- **Ascendant**: Rising sign details
 
 ## Data Flow
 
-1. **User Input**: Birth information entered through validated form
-2. **Geocoding**: Location converted to coordinates if not provided
-3. **API Call**: Birth data sent to astrology service for chart calculation
-4. **Data Storage**: Chart results stored in database with user information
-5. **Display**: Processed chart data rendered in organized, readable format
-
-### Database Schema
-- **Users Table**: Basic user information (id, username, password)
-- **Birth Charts Table**: Chart data (id, name, birth details, coordinates, chart_data, timestamps)
+1. **API Request**: Birth information received via POST request
+2. **Validation**: Pydantic models validate input data format
+3. **Geocoding**: Location converted to coordinates if not provided
+4. **API Call**: Birth data sent to Free Astrology API for calculations
+5. **Processing**: Raw API response parsed into structured format
+6. **Response**: Complete astrology chart returned as JSON
 
 ## External Dependencies
 

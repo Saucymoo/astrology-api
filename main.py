@@ -156,6 +156,81 @@ async def get_zodiac_signs():
     ]
 
 
+@app.get("/house-systems", response_model=Dict[str, str])
+async def get_house_systems():
+    """Get available house systems with descriptions."""
+    return {
+        "P": "Placidus",
+        "K": "Koch", 
+        "O": "Porphyrius",
+        "R": "Regiomontanus",
+        "C": "Campanus",
+        "A": "Equal Houses",
+        "V": "Vehlow Equal Houses", 
+        "W": "Whole Sign Houses",
+        "X": "Meridian Houses",
+        "H": "Azimuthal",
+        "T": "Topocentric",
+        "B": "Alcabitius",
+        "M": "Morinus"
+    }
+
+
+@app.get("/current-house-system", response_model=Dict[str, str])
+async def get_current_house_system():
+    """Get currently configured house system."""
+    current = astrology_service.get_house_system()
+    systems = {
+        "P": "Placidus", "K": "Koch", "O": "Porphyrius", "R": "Regiomontanus",
+        "C": "Campanus", "A": "Equal Houses", "V": "Vehlow Equal Houses", 
+        "W": "Whole Sign Houses", "X": "Meridian Houses", "H": "Azimuthal",
+        "T": "Topocentric", "B": "Alcabitius", "M": "Morinus"
+    }
+    return {
+        "code": current,
+        "name": systems.get(current, "Unknown"),
+        "description": f"Currently using {systems.get(current, 'Unknown')} house system"
+    }
+
+
+@app.post("/set-house-system", response_model=Dict[str, str])
+async def set_house_system(request: Dict[str, str]):
+    """
+    Change the house system used for chart calculations.
+    
+    Args:
+        request: Dictionary with 'house_system' key (e.g., {"house_system": "W"})
+    
+    Returns:
+        Confirmation of the change
+    """
+    try:
+        house_system = request.get("house_system")
+        if not house_system:
+            raise HTTPException(status_code=400, detail="house_system parameter is required")
+        
+        astrology_service.set_house_system(house_system)
+        
+        systems = {
+            "P": "Placidus", "K": "Koch", "O": "Porphyrius", "R": "Regiomontanus",
+            "C": "Campanus", "A": "Equal Houses", "V": "Vehlow Equal Houses", 
+            "W": "Whole Sign Houses", "X": "Meridian Houses", "H": "Azimuthal",
+            "T": "Topocentric", "B": "Alcabitius", "M": "Morinus"
+        }
+        
+        return {
+            "success": "true",
+            "message": f"House system changed to {systems.get(house_system, 'Unknown')}",
+            "code": house_system,
+            "name": systems.get(house_system, "Unknown")
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to set house system: {str(e)}")
+
+
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

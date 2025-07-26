@@ -22,6 +22,23 @@ class AstrologyService:
         self.base_url = "https://api.freeastrologyapi.com/api/v1"
         self.timeout = 30
         
+        # House system configuration - CRITICAL FOR ASTROLOGICAL ACCURACY
+        self.house_system = "W"  # Whole Sign Houses
+        # Available options:
+        # "P" = Placidus (default in many systems)
+        # "K" = Koch
+        # "O" = Porphyrius
+        # "R" = Regiomontanus
+        # "C" = Campanus
+        # "A" = Equal Houses
+        # "V" = Vehlow Equal Houses
+        # "W" = Whole Sign Houses
+        # "X" = Meridian Houses
+        # "H" = Azimuthal
+        # "T" = Topocentric
+        # "B" = Alcabitius
+        # "M" = Morinus
+        
         # Zodiac sign mapping
         self.zodiac_signs = [
             "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
@@ -86,7 +103,7 @@ class AstrologyService:
             hour = int(time_parts[0])
             minute = int(time_parts[1])
             
-            # Prepare API request payload
+            # Prepare API request payload with Whole Sign house system
             payload = {
                 "day": day,
                 "month": month,
@@ -95,7 +112,8 @@ class AstrologyService:
                 "min": minute,
                 "lat": birth_info.latitude,
                 "lon": birth_info.longitude,
-                "tzone": birth_info.timezone or 0
+                "tzone": birth_info.timezone or 0,
+                "house_system": self.house_system  # "W" for Whole Sign Houses
             }
             
             logger.info(f"Calling Free Astrology API with payload: {payload}")
@@ -209,3 +227,39 @@ class AstrologyService:
     def get_zodiac_signs(self) -> List[str]:
         """Get list of zodiac signs."""
         return self.zodiac_signs.copy()
+    
+    def set_house_system(self, house_system: str) -> None:
+        """
+        Change the house system used for calculations.
+        
+        Args:
+            house_system: House system code (e.g., "W" for Whole Sign, "P" for Placidus)
+        """
+        valid_systems = ["P", "K", "O", "R", "C", "A", "V", "W", "X", "H", "T", "B", "M"]
+        if house_system not in valid_systems:
+            raise ValueError(f"Invalid house system '{house_system}'. Valid options: {valid_systems}")
+        
+        self.house_system = house_system
+        logger.info(f"House system changed to: {house_system}")
+    
+    def get_house_system(self) -> str:
+        """Get current house system setting."""
+        return self.house_system
+    
+    def get_available_house_systems(self) -> Dict[str, str]:
+        """Get all available house systems with descriptions."""
+        return {
+            "P": "Placidus",
+            "K": "Koch", 
+            "O": "Porphyrius",
+            "R": "Regiomontanus",
+            "C": "Campanus",
+            "A": "Equal Houses",
+            "V": "Vehlow Equal Houses", 
+            "W": "Whole Sign Houses",
+            "X": "Meridian Houses",
+            "H": "Azimuthal",
+            "T": "Topocentric",
+            "B": "Alcabitius",
+            "M": "Morinus"
+        }

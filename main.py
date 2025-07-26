@@ -21,7 +21,8 @@ from models import (
     Ascendant,
     ErrorResponse
 )
-from models_enhanced import ChartResponse, PlacementInfo
+from models_enhanced import ChartResponse
+from models_chart_points import CompleteChartResponse, ChartAngle, PlacementInfo
 from services.mock_astrology_service import MockAstrologyService
 from services.geocoding_service import GeocodingService
 
@@ -69,7 +70,7 @@ async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 
-@app.post("/generate-chart", response_model=ChartResponse)
+@app.post("/generate-chart", response_model=CompleteChartResponse)
 async def generate_astrology_chart(birth_info: BirthInfoRequest):
     """
     Generate an astrology chart from birth information.
@@ -102,8 +103,8 @@ async def generate_astrology_chart(birth_info: BirthInfoRequest):
         logger.info("Calling astrology service...")
         raw_chart = await astrology_service.generate_chart(birth_info)
         
-        # Convert to user's preferred format
-        chart_response = _convert_to_chart_response(raw_chart)
+        # Convert to complete chart format with all required points
+        chart_response = _convert_to_complete_chart_response(raw_chart)
         
         logger.info("Chart generated successfully")
         return chart_response
@@ -116,36 +117,72 @@ async def generate_astrology_chart(birth_info: BirthInfoRequest):
         )
 
 
-def _convert_to_chart_response(raw_chart: AstrologyResponse) -> ChartResponse:
-    """Convert internal chart format to user's preferred response format."""
+def _convert_to_complete_chart_response(raw_chart: AstrologyResponse) -> CompleteChartResponse:
+    """Convert internal chart format to complete chart with all required astrological points."""
     
     # Find key planets
     planets = raw_chart.planets
     sun = next((p for p in planets if p.name == "Sun"), None)
     moon = next((p for p in planets if p.name == "Moon"), None)
     
-    # Get Midheaven (10th house cusp)
-    tenth_house = next((h for h in raw_chart.houses if h.house == 10), None)
-    midheaven_sign = tenth_house.sign if tenth_house else "Unknown"
+    # Calculate chart angles from house cusps
+    houses = raw_chart.houses
     
-    # Create placements array
-    placements = [
-        PlacementInfo(
+    # Midheaven (MC) - 10th house cusp
+    tenth_house = next((h for h in houses if h.house == 10), None)
+    midheaven = ChartAngle(
+        sign=tenth_house.sign if tenth_house else "Unknown",
+        degree=tenth_house.degree if tenth_house else 0.0
+    )
+    
+    # Descendant (DC) - opposite of Ascendant (7th house cusp)
+    seventh_house = next((h for h in houses if h.house == 7), None)
+    descendant = ChartAngle(
+        sign=seventh_house.sign if seventh_house else "Unknown", 
+        degree=seventh_house.degree if seventh_house else 0.0
+    )
+    
+    # Imum Coeli (IC) - 4th house cusp (opposite of MC)
+    fourth_house = next((h for h in houses if h.house == 4), None)
+    imum_coeli = ChartAngle(
+        sign=fourth_house.sign if fourth_house else "Unknown",
+        degree=fourth_house.degree if fourth_house else 0.0
+    )
+    
+    # Ensure all required planets are present
+    required_planets = [
+        "Sun", "Moon", "Mercury", "Venus", "Mars", 
+        "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Chiron"
+    ]
+    
+    # Create placements array with all planets
+    placements = []
+    for planet in planets:
+        placement = PlacementInfo(
             planet=planet.name,
             sign=planet.sign,
             house=planet.house,
             degree=planet.degree,
             retrograde=planet.retro or False
         )
-        for planet in planets
-    ]
+        placements.append(placement)
     
-    return ChartResponse(
+    # Verify we have all required planets
+    found_planets = {p.planet for p in placements}
+    missing_planets = set(required_planets) - found_planets
+    if missing_planets:
+        logger.warning(f"Missing required planets: {missing_planets}")
+    
+    return CompleteChartResponse(
         risingSign=raw_chart.ascendant.sign,
         sunSign=sun.sign if sun else "Unknown",
-        moonSign=moon.sign if moon else "Unknown", 
-        midheaven=midheaven_sign,
-        placements=placements
+        moonSign=moon.sign if moon else "Unknown",
+        midheaven=midheaven,
+        descendant=descendant,
+        imumCoeli=imum_coeli,
+        placements=placements,
+        houseSystem="W",  # Whole Sign
+        generatedAt=datetime.now()
     )
 
 

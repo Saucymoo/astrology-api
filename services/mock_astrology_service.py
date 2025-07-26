@@ -30,7 +30,7 @@ class MockAstrologyService:
         self.planets = [
             "Sun", "Moon", "Mercury", "Venus", "Mars",
             "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto",
-            "North Node", "South Node"
+            "Chiron", "North Node", "South Node"
         ]
     
     async def generate_chart(self, birth_info: BirthInfoRequest) -> AstrologyResponse:

@@ -217,11 +217,11 @@ class AstrologyService:
         return "Unknown"
     
     def get_supported_planets(self) -> List[str]:
-        """Get list of supported planets."""
+        """Get list of supported planets and astrological points."""
         return [
             "Sun", "Moon", "Mercury", "Venus", "Mars",
             "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto",
-            "North Node", "South Node", "Chiron"
+            "Chiron", "North Node", "South Node"
         ]
     
     def get_zodiac_signs(self) -> List[str]:

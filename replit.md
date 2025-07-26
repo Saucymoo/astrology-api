@@ -2,12 +2,14 @@
 
 ## Overview
 
-This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns data in a clean JSON format with risingSign, sunSign, moonSign, midheaven, and detailed planetary placements.
+This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns all required astrological points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, Midheaven, Descendant, and Imum Coeli.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 Project Focus: Backend API for programmatic use, not web interface.
+Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, Midheaven, Descendant, Imum Coeli.
+House System: Must use Whole Sign houses exclusively.
 
 ## System Architecture
 
@@ -44,7 +46,8 @@ Project Focus: Backend API for programmatic use, not web interface.
 
 ### Data Models
 - **BirthInfoRequest**: Validated birth information input (name, date, time, location)
-- **ChartResponse**: User's preferred output format with risingSign, sunSign, moonSign, midheaven, placements
+- **CompleteChartResponse**: Complete chart format with all required astrological points
+- **ChartAngle**: Chart angle data (Midheaven, Descendant, Imum Coeli) with sign and degree
 - **PlacementInfo**: Individual planet placement with sign, house, degree, retrograde status
 - **AstrologyResponse**: Internal complete chart format with planets, houses, ascendant
 - **Planet**: Individual planetary position and attributes
@@ -59,7 +62,7 @@ Project Focus: Backend API for programmatic use, not web interface.
 4. **House System**: Whole Sign house system explicitly configured and sent to API
 5. **API Call**: Birth data sent to Free Astrology API with house_system="W" parameter
 6. **Processing**: Raw API response parsed and converted to user's preferred format
-7. **Response**: Clean JSON with risingSign, sunSign, moonSign, midheaven, and placements array
+7. **Response**: Complete JSON with all required astrological points including chart angles and planetary placements
 
 ## External Dependencies
 

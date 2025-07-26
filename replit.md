@@ -2,13 +2,13 @@
 
 ## Overview
 
-This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns all required astrological points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, Midheaven, Descendant, and Imum Coeli.
+This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns all required astrological points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, and Imum Coeli.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 Project Focus: Backend API for programmatic use, not web interface.
-Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, Midheaven, Descendant, Imum Coeli.
+Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, Imum Coeli.
 House System: Must use Whole Sign houses exclusively.
 
 ## System Architecture

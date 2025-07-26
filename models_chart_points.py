@@ -147,6 +147,20 @@ class CompleteChartResponse(BaseModel):
                         "house": 2,
                         "degree": 14.3,
                         "retrograde": False
+                    },
+                    {
+                        "planet": "North Node",
+                        "sign": "Leo",
+                        "house": 1,
+                        "degree": 22.8,
+                        "retrograde": False
+                    },
+                    {
+                        "planet": "South Node",
+                        "sign": "Aquarius",
+                        "house": 7,
+                        "degree": 22.8,
+                        "retrograde": False
                     }
                 ],
                 "houseSystem": "W",

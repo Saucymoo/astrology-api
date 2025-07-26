@@ -152,7 +152,8 @@ def _convert_to_complete_chart_response(raw_chart: AstrologyResponse) -> Complet
     # Ensure all required planets are present
     required_planets = [
         "Sun", "Moon", "Mercury", "Venus", "Mars", 
-        "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Chiron"
+        "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Chiron",
+        "North Node", "South Node"
     ]
     
     # Create placements array with all planets

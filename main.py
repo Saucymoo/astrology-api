@@ -21,6 +21,7 @@ from models import (
     Ascendant,
     ErrorResponse
 )
+from models_enhanced import ChartResponse, PlacementInfo
 from services.mock_astrology_service import MockAstrologyService
 from services.geocoding_service import GeocodingService
 
@@ -68,17 +69,19 @@ async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 
-@app.post("/generate-chart", response_model=AstrologyResponse)
+@app.post("/generate-chart", response_model=ChartResponse)
 async def generate_astrology_chart(birth_info: BirthInfoRequest):
     """
     Generate an astrology chart from birth information.
+    
+    Returns data in clean JSON format with risingSign, sunSign, moonSign, 
+    midheaven, and detailed placements array using Whole Sign houses.
     
     Args:
         birth_info: Birth details including name, date, time, and location
         
     Returns:
-        AstrologyResponse: Complete astrology chart with planetary positions,
-                          houses, and key placements
+        ChartResponse: Clean JSON with key placements and house information
                           
     Raises:
         HTTPException: If chart generation fails
@@ -97,10 +100,13 @@ async def generate_astrology_chart(birth_info: BirthInfoRequest):
         
         # Generate astrology chart
         logger.info("Calling astrology service...")
-        chart_data = await astrology_service.generate_chart(birth_info)
+        raw_chart = await astrology_service.generate_chart(birth_info)
+        
+        # Convert to user's preferred format
+        chart_response = _convert_to_chart_response(raw_chart)
         
         logger.info("Chart generated successfully")
-        return chart_data
+        return chart_response
         
     except Exception as e:
         logger.error(f"Chart generation failed: {str(e)}")
@@ -108,6 +114,39 @@ async def generate_astrology_chart(birth_info: BirthInfoRequest):
             status_code=400,
             detail=f"Failed to generate astrology chart: {str(e)}"
         )
+
+
+def _convert_to_chart_response(raw_chart: AstrologyResponse) -> ChartResponse:
+    """Convert internal chart format to user's preferred response format."""
+    
+    # Find key planets
+    planets = raw_chart.planets
+    sun = next((p for p in planets if p.name == "Sun"), None)
+    moon = next((p for p in planets if p.name == "Moon"), None)
+    
+    # Get Midheaven (10th house cusp)
+    tenth_house = next((h for h in raw_chart.houses if h.house == 10), None)
+    midheaven_sign = tenth_house.sign if tenth_house else "Unknown"
+    
+    # Create placements array
+    placements = [
+        PlacementInfo(
+            planet=planet.name,
+            sign=planet.sign,
+            house=planet.house,
+            degree=planet.degree,
+            retrograde=planet.retro or False
+        )
+        for planet in planets
+    ]
+    
+    return ChartResponse(
+        risingSign=raw_chart.ascendant.sign,
+        sunSign=sun.sign if sun else "Unknown",
+        moonSign=moon.sign if moon else "Unknown", 
+        midheaven=midheaven_sign,
+        placements=placements
+    )
 
 
 @app.post("/geocode", response_model=Dict[str, Any])

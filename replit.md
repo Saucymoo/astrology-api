@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data including planetary positions, houses, and key placements like Sun, Moon, and Rising signs.
+This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns data in a clean JSON format with risingSign, sunSign, moonSign, midheaven, and detailed planetary placements.
 
 ## User Preferences
 
@@ -27,11 +27,14 @@ Project Focus: Backend API for programmatic use, not web interface.
 ## Key Components
 
 ### Core API Endpoints
-1. **POST /generate-chart** - Main endpoint for astrology chart generation
+1. **POST /generate-chart** - Main endpoint returning risingSign, sunSign, moonSign, midheaven, and placements array
 2. **POST /geocode** - Location name to coordinates conversion
-3. **GET /health** - Health check and monitoring
-4. **GET /planets** - List of supported celestial bodies
-5. **GET /zodiac-signs** - List of zodiac signs
+3. **GET /current-house-system** - Check current house system configuration
+4. **POST /set-house-system** - Change house system programmatically
+5. **GET /house-systems** - List all available house systems
+6. **GET /health** - Health check and monitoring
+7. **GET /planets** - List of supported celestial bodies
+8. **GET /zodiac-signs** - List of zodiac signs
 
 ### API Integration
 - **Free Astrology API** for chart calculations and planetary positions
@@ -40,20 +43,23 @@ Project Focus: Backend API for programmatic use, not web interface.
 - Automatic coordinate detection from location names
 
 ### Data Models
-- **BirthInfoRequest**: Validated birth information input
-- **AstrologyResponse**: Complete chart with planets, houses, ascendant
+- **BirthInfoRequest**: Validated birth information input (name, date, time, location)
+- **ChartResponse**: User's preferred output format with risingSign, sunSign, moonSign, midheaven, placements
+- **PlacementInfo**: Individual planet placement with sign, house, degree, retrograde status
+- **AstrologyResponse**: Internal complete chart format with planets, houses, ascendant
 - **Planet**: Individual planetary position and attributes
-- **House**: Astrological house cusp information
+- **House**: Astrological house cusp information (configured for Whole Sign system)
 - **Ascendant**: Rising sign details
 
 ## Data Flow
 
-1. **API Request**: Birth information received via POST request
-2. **Validation**: Pydantic models validate input data format
-3. **Geocoding**: Location converted to coordinates if not provided
-4. **API Call**: Birth data sent to Free Astrology API for calculations
-5. **Processing**: Raw API response parsed into structured format
-6. **Response**: Complete astrology chart returned as JSON
+1. **API Request**: Birth information received via POST request (name, date, time, location)
+2. **Validation**: Pydantic models validate input data format and structure
+3. **Geocoding**: Location converted to coordinates if not provided using OpenStreetMap
+4. **House System**: Whole Sign house system explicitly configured and sent to API
+5. **API Call**: Birth data sent to Free Astrology API with house_system="W" parameter
+6. **Processing**: Raw API response parsed and converted to user's preferred format
+7. **Response**: Clean JSON with risingSign, sunSign, moonSign, midheaven, and placements array
 
 ## External Dependencies
 

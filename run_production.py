@@ -1,45 +1,26 @@
+#!/usr/bin/env python3
 """
-Production runner for the Astrology API.
-
-This script configures the API for production use with real external APIs.
-Set ENVIRONMENT=production to use real astrology services.
+Production server startup for the Astrology Chart API.
 """
 
-import os
 import uvicorn
+import logging
 from main import app
-from config import get_config, use_real_apis
 
-def setup_production():
-    """Configure the application for production use."""
-    
-    # Set environment
-    os.environ["ENVIRONMENT"] = "production"
-    
-    # Import real services for production
-    if use_real_apis():
-        # Replace mock service with real astrology service
-        from services.astrology_service import AstrologyService
-        from main import astrology_service
-        
-        # Update the service instance
-        app.dependency_overrides = {}
-        print("✓ Configured to use real astrology APIs")
-    else:
-        print("ℹ Using mock services (set ENVIRONMENT=production for real APIs)")
+# Configure production logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    setup_production()
-    config = get_config()
-    
-    print(f"Starting Astrology API in {os.getenv('ENVIRONMENT', 'development')} mode...")
-    print(f"Server will run on {config['host']}:{config['port']}")
-    print(f"Documentation available at: http://{config['host']}:{config['port']}/docs")
+    logger.info("Starting Astrology Chart API server...")
+    logger.info("API Documentation available at: http://localhost:8000/docs")
+    logger.info("Health check available at: http://localhost:8000/health")
+    logger.info("Main endpoint: POST http://localhost:8000/generate-chart")
     
     uvicorn.run(
         "main:app",
-        host=config["host"],
-        port=config["port"],
-        reload=config["reload"],
-        log_level=config["log_level"]
+        host="0.0.0.0",
+        port=8000,
+        log_level="info",
+        reload=False  # Production mode
     )

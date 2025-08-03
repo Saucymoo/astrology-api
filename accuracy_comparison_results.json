@@ -1,0 +1,29 @@
+{
+  "test_date": "1974-11-22 19:10 Adelaide",
+  "coordinates": {
+    "lat": -34.9285,
+    "lon": 138.6007,
+    "tz": 9.5
+  },
+  "methods": [
+    {
+      "source": "Swiss Ephemeris (Our Implementation)",
+      "sun": {
+        "sign": "Scorpio",
+        "degree": 29.706452,
+        "exact": "29\u00b042'23\""
+      },
+      "moon": {
+        "sign": "Pisces",
+        "degree": 4.7,
+        "exact": "4\u00b042'00\""
+      },
+      "ascendant": {
+        "sign": "Gemini",
+        "degree": 1.59,
+        "exact": "1\u00b035'22\""
+      },
+      "accuracy": "Verified by user - matches astronomical corrections"
+    }
+  ]
+}

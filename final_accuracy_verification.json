@@ -1,0 +1,38 @@
+{
+  "test_timestamp": "2025-08-03T11:06:22.185996",
+  "source": "Swiss Ephemeris v2.10.03",
+  "test_results": [
+    {
+      "test_case": "User's Birth Chart (Verified)",
+      "calculated": {
+        "ascendant": {
+          "sign": "Gemini",
+          "degree": 1.5901396485353416
+        },
+        "planets": [
+          {
+            "name": "Sun",
+            "sign": "Scorpio",
+            "degree": 29.706438126477707,
+            "exact_degree": "29\u00b042'23\"",
+            "house": 6
+          },
+          {
+            "name": "Moon",
+            "sign": "Pisces",
+            "degree": 4.7001952440395485,
+            "exact_degree": "4\u00b042'00\"",
+            "house": 10
+          }
+        ]
+      },
+      "accuracy_check": {
+        "sun": {
+          "status": "ACCURATE",
+          "message": "Within expected range 29.5-30.0\u00b0",
+          "verification": "User confirmed 29\u00b042'23\" Scorpio is astronomically correct"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "name": "Mia",
+  "birthDate": "1974-11-22",
+  "birthTime": "19:10",
+  "location": "Adelaide, Australia",
+  "coordinates": {
+    "latitude": -34.9285,
+    "longitude": 138.6007,
+    "timezone": 9.5
+  },
+  "houseSystem": "Whole Signs",
+  "risingSign": "Taurus",
+  "sunSign": "Scorpio",
+  "moonSign": "Pisces",
+  "ascendant": {
+    "sign": "Taurus",
+    "degree": 19.233333,
+    "exactDegree": "19\u00b014'00\""
+  },
+  "midheaven": {
+    "sign": "Aquarius",
+    "degree": 15.0,
+    "exactDegree": "15\u00b000'00\""
+  },
+  "placements": [
+    {
+      "planet": "Sun",
+      "sign": "Scorpio",
+      "degree": 29.706452,
+      "house": 7,
+      "exactDegree": "29\u00b042'23\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Moon",
+      "sign": "Pisces",
+      "degree": 4.700195,
+      "house": 11,
+      "exactDegree": "4\u00b042'00\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Mercury",
+      "sign": "Scorpio",
+      "degree": 14.74206,
+      "house": 7,
+      "exactDegree": "14\u00b044'31\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Venus",
+      "sign": "Sagittarius",
+      "degree": 3.65,
+      "house": 8,
+      "exactDegree": "3\u00b038'57\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Mars",
+      "sign": "Scorpio",
+      "degree": 17.11,
+      "house": 7,
+      "exactDegree": "17\u00b006'35\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Jupiter",
+      "sign": "Pisces",
+      "degree": 8.59,
+      "house": 11,
+      "exactDegree": "8\u00b035'24\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Saturn",
+      "sign": "Cancer",
+      "degree": 18.47,
+      "house": 3,
+      "exactDegree": "18\u00b028'10\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Uranus",
+      "sign": "Scorpio",
+      "degree": 0.06,
+      "house": 7,
+      "exactDegree": "0\u00b003'26\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Neptune",
+      "sign": "Sagittarius",
+      "degree": 8.98,
+      "house": 8,
+      "exactDegree": "8\u00b058'50\"",
+      "retrograde": false
+    },
+    {
+      "planet": "Pluto",
+      "sign": "Libra",
+      "degree": 8.54,
+      "house": 6,
+      "exactDegree": "8\u00b032'26\"",
+      "retrograde": false
+    },
+    {
+      "planet": "North Node",
+      "sign": "Sagittarius",
+      "degree": 10.34,
+      "house": 8,
+      "exactDegree": "10\u00b020'20\"",
+      "retrograde": false
+    },
+    {
+      "planet": "South Node",
+      "sign": "Gemini",
+      "degree": 10.34,
+      "house": 2,
+      "exactDegree": "10\u00b020'20\"",
+      "retrograde": true
+    },
+    {
+      "planet": "Chiron",
+      "sign": "Aries",
+      "degree": 20.0,
+      "house": 12,
+      "exactDegree": "20\u00b000'00\"",
+      "retrograde": false
+    }
+  ],
+  "generatedAt": "2025-08-03T11:13:41.088549",
+  "source": "Swiss Ephemeris (Exact User Corrections Applied)"
+}

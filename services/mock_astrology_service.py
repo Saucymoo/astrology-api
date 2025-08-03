@@ -45,15 +45,25 @@ class MockAstrologyService:
         """
         logger.info(f"Generating mock chart for {birth_info.name}")
         
-        # Generate sample planetary positions
+        # Parse birth date to get realistic Sun sign
+        birth_date = datetime.strptime(birth_info.date, '%Y-%m-%d')
+        
+        # Generate realistic planetary positions based on birth date
         planets = []
         for i, planet_name in enumerate(self.planets):
-            # Create realistic but random positions
-            sign_num = ((i * 3 + hash(birth_info.name)) % 12) + 1
+            if planet_name == "Sun":
+                # Calculate realistic Sun sign based on birth date
+                sun_sign_num, sun_degree = self._calculate_sun_position(birth_date)
+                sign_num = sun_sign_num
+                degree = sun_degree
+            else:
+                # Generate semi-realistic positions for other planets
+                sign_num = ((i * 3 + hash(birth_info.name + birth_info.date)) % 12) + 1
+                degree = (hash(planet_name + birth_info.date + birth_info.time) % 3000) / 100.0
+            
             sign = self.zodiac_signs[sign_num - 1]
-            degree = (hash(planet_name + birth_info.date) % 3000) / 100.0
-            house = ((i * 2 + hash(birth_info.time)) % 12) + 1
-            retro = hash(planet_name + birth_info.name) % 4 == 0  # 25% chance
+            house = ((i * 2 + hash(birth_info.time + planet_name)) % 12) + 1
+            retro = hash(planet_name + birth_info.name + birth_info.date) % 4 == 0  # 25% chance
             
             planet = Planet(
                 name=planet_name,
@@ -133,3 +143,34 @@ class MockAstrologyService:
     def get_house_system(self) -> str:
         """Get current house system setting."""
         return self.house_system
+    
+    def _calculate_sun_position(self, birth_date: datetime) -> tuple:
+        """Calculate realistic Sun sign and degree based on birth date."""
+        month = birth_date.month
+        day = birth_date.day
+        
+        # Approximate Sun sign dates and positions
+        if (month == 3 and day >= 21) or (month == 4 and day <= 19):
+            return 1, 15.0  # Aries
+        elif (month == 4 and day >= 20) or (month == 5 and day <= 20):
+            return 2, 15.0  # Taurus
+        elif (month == 5 and day >= 21) or (month == 6 and day <= 20):
+            return 3, 15.0  # Gemini
+        elif (month == 6 and day >= 21) or (month == 7 and day <= 22):
+            return 4, 15.0  # Cancer
+        elif (month == 7 and day >= 23) or (month == 8 and day <= 22):
+            return 5, 15.0  # Leo
+        elif (month == 8 and day >= 23) or (month == 9 and day <= 22):
+            return 6, 15.0  # Virgo
+        elif (month == 9 and day >= 23) or (month == 10 and day <= 22):
+            return 7, 15.0  # Libra
+        elif (month == 10 and day >= 23) or (month == 11 and day <= 21):
+            return 8, 15.0  # Scorpio
+        elif (month == 11 and day >= 22) or (month == 12 and day <= 21):
+            return 9, 15.0  # Sagittarius - THIS IS WHAT WE EXPECT FOR NOV 22
+        elif (month == 12 and day >= 22) or (month == 1 and day <= 19):
+            return 10, 15.0  # Capricorn
+        elif (month == 1 and day >= 20) or (month == 2 and day <= 18):
+            return 11, 15.0  # Aquarius
+        else:  # Pisces
+            return 12, 15.0  # Pisces

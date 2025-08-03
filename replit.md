@@ -24,10 +24,10 @@ Project Focus: Backend API for programmatic use, not web interface.
 Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, Imum Coeli.
 House System: Must use Whole Sign houses exclusively.
 Development Status: **PRODUCTION READY** - Accurate astronomical data confirmed.
-Deployment Command: `uvicorn main_final:app --host 0.0.0.0 --port 8000`
+Deployment Command: `python run_production.py` or `uvicorn run_production:app --host 0.0.0.0 --port 8000`
 API Documentation: http://localhost:8000/docs
 Main Endpoint: POST /generate-chart
-Test Endpoint: POST /test-chart (uses exact user-provided coordinates)
+Public API URL: http://localhost:8000 (when deployed)
 
 ## System Architecture
 

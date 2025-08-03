@@ -15,7 +15,7 @@ class BirthInfoRequest(BaseModel):
     """Request model for birth information."""
     
     name: str = Field(..., min_length=1, max_length=100, description="Full name")
-    date: str = Field(..., pattern=r'^\d{4}-\d{2}-\d{2}$', description="Birth date in YYYY-MM-DD format")
+    date: str = Field(..., description="Birth date in YYYY-MM-DD, DD/MM/YYYY, or DD-MM-YYYY format")
     time: str = Field(..., pattern=r'^\d{2}:\d{2}$', description="Birth time in HH:MM format (24-hour)")
     location: str = Field(..., min_length=1, max_length=200, description="Birth location (city, state, country)")
     latitude: Optional[float] = Field(None, ge=-90, le=90, description="Latitude coordinate")
@@ -25,11 +25,18 @@ class BirthInfoRequest(BaseModel):
     @validator('date')
     def validate_date(cls, v):
         """Validate date format and ensure it's a valid date."""
-        try:
-            datetime.strptime(v, '%Y-%m-%d')
-            return v
-        except ValueError:
-            raise ValueError('Date must be in YYYY-MM-DD format and be a valid date')
+        # Try multiple date formats
+        formats = ['%Y-%m-%d', '%d/%m/%Y', '%d-%m-%Y']
+        
+        for fmt in formats:
+            try:
+                parsed_date = datetime.strptime(v, fmt)
+                # Return in standardized ISO format
+                return parsed_date.strftime('%Y-%m-%d')
+            except ValueError:
+                continue
+        
+        raise ValueError('Date must be in YYYY-MM-DD, DD/MM/YYYY, or DD-MM-YYYY format and be a valid date')
     
     @validator('time')
     def validate_time(cls, v):

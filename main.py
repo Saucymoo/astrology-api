@@ -25,8 +25,6 @@ from models_enhanced import ChartResponse
 from models_chart_points import CompleteChartResponse, ChartAngle, PlacementInfo, HouseInfo, ChartRuler, MoonPhase, Ascendant
 from services.mock_astrology_service import MockAstrologyService
 from services.geocoding_service import GeocodingService
-from services.astrology_calculations import AstrologyCalculations
-
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -50,13 +48,13 @@ app.add_middleware(
 )
 
 # Initialize services with explicit Whole Sign configuration
-# Use mock service for reliable testing (switch to real service when external API is available)
-astrology_service = MockAstrologyService()
+# Use reliable astrology calculations service with Swiss Ephemeris
+from services.astrology_calculations import AstrologyCalculationsService
+astrology_service = AstrologyCalculationsService()
 astrology_service.set_house_system("W")  # Ensure Whole Sign is set
-logger.info("Using MockAstrologyService with Whole Sign houses for reliable operation")
+logger.info("Using AstrologyCalculationsService with Swiss Ephemeris data and Whole Sign houses")
 
 geocoding_service = GeocodingService()
-astro_calc = AstrologyCalculations()
 
 
 @app.get("/", response_model=Dict[str, str])

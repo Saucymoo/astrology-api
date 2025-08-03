@@ -7,6 +7,7 @@ processes the data into standardized formats.
 
 import requests
 import logging
+import os
 from typing import Dict, List, Any
 from datetime import datetime
 
@@ -21,6 +22,10 @@ class AstrologyService:
     def __init__(self):
         self.base_url = "https://api.freeastrologyapi.com/api/v1"
         self.timeout = 30
+        self.api_key = os.getenv("FREE_ASTROLOGY_API_KEY")
+        
+        if not self.api_key:
+            logger.warning("FREE_ASTROLOGY_API_KEY not found in environment variables")
         
         # House system configuration - CRITICAL FOR ASTROLOGICAL ACCURACY
         self.house_system = "W"  # Whole Sign Houses
@@ -118,15 +123,20 @@ class AstrologyService:
             
             logger.info(f"Calling Free Astrology API with payload: {payload}")
             
-            # Make API request
+            # Make API request with authentication
+            headers = {
+                "Content-Type": "application/json",
+                "User-Agent": "Astrology-Chart-API/1.0"
+            }
+            
+            if self.api_key:
+                headers["Authorization"] = f"Bearer {self.api_key}"
+            
             response = requests.post(
                 f"{self.base_url}/birth-chart",
                 json=payload,
                 timeout=self.timeout,
-                headers={
-                    "Content-Type": "application/json",
-                    "User-Agent": "Astrology-Chart-API/1.0"
-                }
+                headers=headers
             )
             
             if not response.ok:
@@ -213,8 +223,21 @@ class AstrologyService:
             Zodiac sign name
         """
         if 1 <= sign_num <= 12:
-            return self.zodiac_signs[sign_num - 1]
+                return self.zodiac_signs[sign_num - 1]
         return "Unknown"
+    
+    def set_house_system(self, house_system: str) -> None:
+        """Change the house system used for calculations."""
+        valid_systems = ["P", "K", "O", "R", "C", "A", "V", "W", "X", "H", "T", "B", "M"]
+        if house_system not in valid_systems:
+            raise ValueError(f"Invalid house system '{house_system}'. Valid options: {valid_systems}")
+        
+        self.house_system = house_system
+        logger.info(f"House system changed to: {house_system}")
+    
+    def get_house_system(self) -> str:
+        """Get current house system setting."""
+        return self.house_system
     
     def get_supported_planets(self) -> List[str]:
         """Get list of supported planets and astrological points."""

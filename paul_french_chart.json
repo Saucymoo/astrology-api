@@ -1,0 +1,128 @@
+{
+  "name": "Paul French",
+  "birthDate": "1975-04-26",
+  "birthTime": "22:01",
+  "location": "Swindon, United Kingdom",
+  "coordinates": {
+    "latitude": 51.5615327,
+    "longitude": -1.7854322,
+    "timezone": 1
+  },
+  "houseSystem": "Whole Signs",
+  "risingSign": "Scorpio",
+  "sunSign": "Taurus",
+  "moonSign": "Scorpio",
+  "ascendant": {
+    "sign": "Scorpio",
+    "degree": 24.511537222409373,
+    "exactDegree": "24\u00b030'41\""
+  },
+  "placements": [
+    {
+      "name": "Sun",
+      "sign": "Taurus",
+      "degree": 6.0040323927417205,
+      "house": 7,
+      "exact_degree": "6\u00b000'14\"",
+      "retrograde": false
+    },
+    {
+      "name": "Moon",
+      "sign": "Scorpio",
+      "degree": 19.924074596791883,
+      "house": 1,
+      "exact_degree": "19\u00b055'26\"",
+      "retrograde": false
+    },
+    {
+      "name": "Mercury",
+      "sign": "Taurus",
+      "degree": 15.161243980102718,
+      "house": 7,
+      "exact_degree": "15\u00b009'40\"",
+      "retrograde": false
+    },
+    {
+      "name": "Venus",
+      "sign": "Gemini",
+      "degree": 15.152158043227985,
+      "house": 8,
+      "exact_degree": "15\u00b009'07\"",
+      "retrograde": false
+    },
+    {
+      "name": "Mars",
+      "sign": "Pisces",
+      "degree": 11.475725114634827,
+      "house": 5,
+      "exact_degree": "11\u00b028'32\"",
+      "retrograde": false
+    },
+    {
+      "name": "Jupiter",
+      "sign": "Aries",
+      "degree": 9.324768517483216,
+      "house": 6,
+      "exact_degree": "9\u00b019'29\"",
+      "retrograde": false
+    },
+    {
+      "name": "Saturn",
+      "sign": "Cancer",
+      "degree": 13.629851076136006,
+      "house": 9,
+      "exact_degree": "13\u00b037'47\"",
+      "retrograde": false
+    },
+    {
+      "name": "Uranus",
+      "sign": "Scorpio",
+      "degree": 0.2049677245999817,
+      "house": 1,
+      "exact_degree": "0\u00b012'17\"",
+      "retrograde": false
+    },
+    {
+      "name": "Neptune",
+      "sign": "Sagittarius",
+      "degree": 11.312650558452503,
+      "house": 2,
+      "exact_degree": "11\u00b018'45\"",
+      "retrograde": false
+    },
+    {
+      "name": "Pluto",
+      "sign": "Libra",
+      "degree": 7.140206246397554,
+      "house": 12,
+      "exact_degree": "7\u00b008'24\"",
+      "retrograde": false
+    },
+    {
+      "name": "North Node",
+      "sign": "Sagittarius",
+      "degree": 1.002573812215246,
+      "house": 2,
+      "exact_degree": "1\u00b000'09\"",
+      "retrograde": false
+    },
+    {
+      "name": "South Node",
+      "sign": "Gemini",
+      "degree": 1.002573812215246,
+      "house": 8,
+      "exact_degree": "1\u00b000'09\"",
+      "retrograde": false
+    },
+    {
+      "name": "Chiron",
+      "sign": "Aries",
+      "degree": 20.0,
+      "house": 6,
+      "exact_degree": "20\u00b000'00\"",
+      "retrograde": false
+    }
+  ],
+  "generatedAt": "2025-08-03T11:17:26.224399",
+  "source": "Swiss Ephemeris with Whole Sign House Corrections"
+}

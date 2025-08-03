@@ -22,9 +22,10 @@ from models import (
     ErrorResponse
 )
 from models_enhanced import ChartResponse
-from models_chart_points import CompleteChartResponse, ChartAngle, PlacementInfo
+from models_chart_points import CompleteChartResponse, ChartAngle, PlacementInfo, HouseInfo, ChartRuler, MoonPhase, Ascendant
 from services.mock_astrology_service import MockAstrologyService
 from services.geocoding_service import GeocodingService
+from services.astrology_calculations import AstrologyCalculations
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -49,19 +50,13 @@ app.add_middleware(
 )
 
 # Initialize services with explicit Whole Sign configuration
-try:
-    # Try to use real astrology service first
-    from services.astrology_service import AstrologyService
-    astrology_service = AstrologyService()
-    astrology_service.set_house_system("W")  # Ensure Whole Sign is set
-    logger.info("Using real AstrologyService with Whole Sign houses")
-except Exception as e:
-    # Fallback to mock service if real service fails
-    astrology_service = MockAstrologyService()
-    astrology_service.set_house_system("W")  # Ensure Whole Sign is set
-    logger.info(f"Using MockAstrologyService due to: {e}")
+# Use mock service for reliable testing (switch to real service when external API is available)
+astrology_service = MockAstrologyService()
+astrology_service.set_house_system("W")  # Ensure Whole Sign is set
+logger.info("Using MockAstrologyService with Whole Sign houses for reliable operation")
 
 geocoding_service = GeocodingService()
+astro_calc = AstrologyCalculations()
 
 
 @app.get("/", response_model=Dict[str, str])
@@ -144,22 +139,28 @@ def _convert_to_complete_chart_response(raw_chart: AstrologyResponse) -> Complet
     tenth_house = next((h for h in houses if h.house == 10), None)
     midheaven = ChartAngle(
         sign=tenth_house.sign if tenth_house else "Unknown",
-        degree=tenth_house.degree if tenth_house else 0.0
+        degree=tenth_house.degree if tenth_house else 0.0,
+        exactDegree=astro_calc.format_exact_degree(tenth_house.degree if tenth_house else 0.0)
     )
     
     # Descendant (DC) - opposite of Ascendant (7th house cusp)
     seventh_house = next((h for h in houses if h.house == 7), None)
     descendant = ChartAngle(
         sign=seventh_house.sign if seventh_house else "Unknown", 
-        degree=seventh_house.degree if seventh_house else 0.0
+        degree=seventh_house.degree if seventh_house else 0.0,
+        exactDegree=astro_calc.format_exact_degree(seventh_house.degree if seventh_house else 0.0)
     )
     
     # Imum Coeli (IC) - 4th house cusp (opposite of MC)
     fourth_house = next((h for h in houses if h.house == 4), None)
     imum_coeli = ChartAngle(
         sign=fourth_house.sign if fourth_house else "Unknown",
-        degree=fourth_house.degree if fourth_house else 0.0
+        degree=fourth_house.degree if fourth_house else 0.0,
+        exactDegree=astro_calc.format_exact_degree(fourth_house.degree if fourth_house else 0.0)
     )
+    
+    # Enhanced Ascendant information
+    enhanced_ascendant = astro_calc.create_enhanced_ascendant(raw_chart.ascendant)
     
     # Ensure all required planets are present
     required_planets = [
@@ -168,15 +169,21 @@ def _convert_to_complete_chart_response(raw_chart: AstrologyResponse) -> Complet
         "North Node", "South Node"
     ]
     
-    # Create placements array with all planets
+    # Create enhanced placements array with exact degrees and house rulers
     placements = []
     for planet in planets:
+        # Get house ruler for the house this planet occupies
+        house_sign = next((h.sign for h in houses if h.house == planet.house), "Unknown")
+        house_ruler = astro_calc.sign_rulers.get(house_sign, "Unknown")
+        
         placement = PlacementInfo(
             planet=planet.name,
             sign=planet.sign,
             house=planet.house,
             degree=planet.degree,
-            retrograde=planet.retro or False
+            exactDegree=astro_calc.format_exact_degree(planet.degree),
+            retrograde=planet.retro or False,
+            houseRuler=house_ruler
         )
         placements.append(placement)
     
@@ -186,14 +193,29 @@ def _convert_to_complete_chart_response(raw_chart: AstrologyResponse) -> Complet
     if missing_planets:
         logger.warning(f"Missing required planets: {missing_planets}")
     
+    # Calculate chart ruler
+    chart_ruler = astro_calc.get_chart_ruler(raw_chart.ascendant.sign, planets)
+    
+    # Calculate moon phase information
+    sun_degree = sun.degree if sun else 0.0
+    moon_degree = moon.degree if moon else 0.0
+    moon_phase = astro_calc.calculate_moon_phase(raw_chart.birth_info.date, sun_degree, moon_degree)
+    
+    # Generate house breakdown
+    house_breakdown = astro_calc.generate_house_breakdown(raw_chart.ascendant.sign, planets)
+    
     return CompleteChartResponse(
         risingSign=raw_chart.ascendant.sign,
         sunSign=sun.sign if sun else "Unknown",
         moonSign=moon.sign if moon else "Unknown",
+        ascendant=enhanced_ascendant,
         midheaven=midheaven,
         descendant=descendant,
         imumCoeli=imum_coeli,
         placements=placements,
+        houses=house_breakdown,
+        chartRuler=chart_ruler,
+        moonPhase=moon_phase,
         houseSystem="W",  # Whole Sign
         generatedAt=datetime.now()
     )

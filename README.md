@@ -8,14 +8,21 @@ A complete Python FastAPI backend service for generating personalized astrology 
 
 ## Features
 
-- **Complete Coverage**: All 17 required astrological points
-  - 11 Planetary Bodies: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron
-  - 2 Lunar Nodes: North Node, South Node
-  - 4 Chart Angles: Rising, Midheaven, Descendant, Imum Coeli
+- **Complete Natal Chart Breakdown**: Comprehensive astrological analysis
+  - 13 Planetary Bodies: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node
+  - Chart Angles: Rising (exact degree), Midheaven, Descendant, Imum Coeli
+  - Each planet shows sign, house (1-12), and exact degree format
+  
+- **Advanced Analysis**:
+  - Chart ruler identification based on Rising sign
+  - Moon phase calculation with illumination percentage
+  - Void-of-course Moon status
+  - House rulers for each planetary placement
+  - Complete house breakdown with occupying planets
 
-- **Whole Sign House System**: Exclusively configured
+- **Whole Sign House System**: Exclusively configured for traditional accuracy
 - **No Authentication**: Public API ready for integration
-- **JSON Format**: Clean, structured responses
+- **Enhanced JSON Format**: Detailed, structured responses with exact degree formatting
 
 ## Usage
 
@@ -35,21 +42,53 @@ Content-Type: application/json
 
 ```json
 {
-  "risingSign": "Taurus",
-  "sunSign": "Sagittarius",
-  "moonSign": "Pisces",
-  "midheaven": {"sign": "Aquarius", "degree": 0.0},
-  "descendant": {"sign": "Scorpio", "degree": 0.0},
-  "imumCoeli": {"sign": "Leo", "degree": 0.0},
+  "risingSign": "Sagittarius",
+  "sunSign": "Libra",
+  "moonSign": "Capricorn",
+  "ascendant": {
+    "sign": "Sagittarius",
+    "degree": 19.16,
+    "exactDegree": "19°09'36\""
+  },
+  "midheaven": {
+    "sign": "Virgo", 
+    "degree": 0.0,
+    "exactDegree": "0°00'00\""
+  },
+  "chartRuler": {
+    "planet": "Jupiter",
+    "sign": "Capricorn",
+    "house": 1,
+    "degree": 15.25,
+    "exactDegree": "15°15'00\"",
+    "retrograde": false
+  },
+  "moonPhase": {
+    "phaseName": "New Moon",
+    "illumination": 0.0,
+    "isVoidOfCourse": false,
+    "nextAspect": null
+  },
   "placements": [
     {
       "planet": "Sun",
-      "sign": "Sagittarius",
-      "house": 4,
-      "degree": 10.03,
-      "retrograde": false
+      "sign": "Libra",
+      "house": 3,
+      "degree": 20.33,
+      "exactDegree": "20°19'47\"",
+      "retrograde": false,
+      "houseRuler": "Saturn"
     }
     // ... continues with all 13 planetary bodies
+  ],
+  "houses": [
+    {
+      "house": 1,
+      "sign": "Sagittarius",
+      "ruler": "Jupiter",
+      "planets": ["Jupiter", "North Node"]
+    }
+    // ... continues with all 12 houses
   ],
   "houseSystem": "W"
 }

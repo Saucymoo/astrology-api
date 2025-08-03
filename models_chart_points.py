@@ -7,17 +7,56 @@ from typing import List, Optional
 from datetime import datetime
 
 
+class Ascendant(BaseModel):
+    """Model for Ascendant (Rising Sign) information."""
+    
+    sign: str = Field(..., description="Rising sign")
+    degree: float = Field(..., ge=0, lt=360, description="Degree position")
+    exactDegree: str = Field(..., description="Exact degree in format 'XX°XX'XX\"'")
+    
+
+class MoonPhase(BaseModel):
+    """Model for Moon phase information."""
+    
+    phaseName: str = Field(..., description="Name of the moon phase")
+    illumination: float = Field(..., ge=0, le=100, description="Percentage of moon illuminated")
+    isVoidOfCourse: bool = Field(False, description="Whether Moon is void of course")
+    nextAspect: Optional[str] = Field(None, description="Next major aspect the Moon will make")
+
+
+class ChartRuler(BaseModel):
+    """Model for chart ruler information."""
+    
+    planet: str = Field(..., description="Chart ruling planet")
+    sign: str = Field(..., description="Sign the chart ruler is in")
+    house: int = Field(..., ge=1, le=12, description="House the chart ruler is in")
+    degree: float = Field(..., ge=0, lt=360, description="Degree position")
+    exactDegree: str = Field(..., description="Exact degree in format 'XX°XX'XX\"'")
+    retrograde: bool = Field(False, description="Whether chart ruler is retrograde")
+
+
+class HouseInfo(BaseModel):
+    """Model for individual house information in Whole Sign system."""
+    
+    house: int = Field(..., ge=1, le=12, description="House number")
+    sign: str = Field(..., description="Sign on house cusp (same sign throughout in Whole Sign)")
+    ruler: str = Field(..., description="Traditional ruler of this house sign")
+    planets: List[str] = Field(default_factory=list, description="Planets located in this house")
+
+
 class ChartAngle(BaseModel):
     """Model for major chart angles (MC, IC, DC)."""
     
     sign: str = Field(..., description="Zodiac sign")
     degree: float = Field(..., ge=0, lt=360, description="Degree position")
+    exactDegree: str = Field(..., description="Exact degree in format 'XX°XX'XX\"'")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "sign": "Taurus",
-                "degree": 15.3
+                "degree": 15.3,
+                "exactDegree": "15°18'00\""
             }
         }
 
@@ -29,7 +68,9 @@ class PlacementInfo(BaseModel):
     sign: str = Field(..., description="Zodiac sign")
     house: int = Field(..., ge=1, le=12, description="House position")
     degree: float = Field(..., ge=0, lt=360, description="Degree position")
+    exactDegree: str = Field(..., description="Exact degree in format 'XX°XX'XX\"'")
     retrograde: bool = Field(False, description="Retrograde status")
+    houseRuler: Optional[str] = Field(None, description="Traditional ruler of the house this planet occupies")
 
 
 class CompleteChartResponse(BaseModel):
@@ -37,8 +78,11 @@ class CompleteChartResponse(BaseModel):
     
     # Basic Chart Points
     risingSign: str = Field(..., description="Rising sign (Ascendant)")
-    sunSign: str = Field(..., description="Sun sign")
+    sunSign: str = Field(..., description="Sun sign") 
     moonSign: str = Field(..., description="Moon sign")
+    
+    # Detailed Ascendant Information
+    ascendant: Ascendant = Field(..., description="Detailed Ascendant (Rising Sign) information")
     
     # Chart Angles
     midheaven: ChartAngle = Field(..., description="Midheaven (MC) position")
@@ -47,6 +91,15 @@ class CompleteChartResponse(BaseModel):
     
     # All Planetary Placements
     placements: List[PlacementInfo] = Field(..., description="All planetary placements")
+    
+    # House Information (Whole Sign System)
+    houses: List[HouseInfo] = Field(..., description="Complete house breakdown with rulers and planet placements")
+    
+    # Chart Ruler
+    chartRuler: ChartRuler = Field(..., description="Chart ruler based on Rising sign")
+    
+    # Moon Phase Information
+    moonPhase: MoonPhase = Field(..., description="Current moon phase and void of course status")
     
     # Generation metadata
     houseSystem: str = Field("W", description="House system used (W = Whole Sign)")

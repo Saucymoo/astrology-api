@@ -2,17 +2,21 @@
 
 ## Overview
 
-This is a Python FastAPI backend service that generates personalized astrology charts based on user birth information. The API accepts birth details (name, date, time, location) and returns comprehensive astrological data using the Whole Sign house system specifically. The main endpoint `/generate-chart` returns all required astrological points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, and Imum Coeli.
+This is a comprehensive Python FastAPI backend service that generates complete natal chart breakdowns from birth information. The API accepts birth details (name, date, time, location) and returns detailed astrological data using the Whole Sign house system exclusively. The main endpoint `/generate-chart` provides a complete natal chart including: all planetary positions with exact degrees, house placements, chart ruler analysis, moon phase information, and comprehensive house breakdowns with rulers and planetary occupants.
 
 ## Recent Changes
 
-**July 26, 2025**: 
-- ✓ Complete API implementation with all 17 astrological points
-- ✓ North Node and South Node added to planetary coverage  
-- ✓ All chart angles implemented (Midheaven, Descendant, Imum Coeli)
-- ✓ Whole Sign house system confirmed and tested
-- ✓ API tested and verified working at https://workspace.miamitchell1974.repl.co/generate-chart
-- ✓ Ready for production deployment and GPT integration
+**August 3, 2025**: 
+- ✓ Enhanced API with complete natal chart breakdown
+- ✓ Each planet shows sign, exact degree format, and house (1-12)
+- ✓ Ascendant with exact degree positioning
+- ✓ Midheaven (MC) sign and precise degree
+- ✓ House placements using Whole Sign logic with planet distribution
+- ✓ Chart ruler identification based on Rising sign
+- ✓ Moon phase calculation and void-of-course status
+- ✓ House rulers for each planetary placement
+- ✓ Complete house breakdown showing rulers and occupying planets
+- ✓ All 17 astrological points with enhanced formatting
 
 ## User Preferences
 

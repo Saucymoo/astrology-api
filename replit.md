@@ -23,11 +23,12 @@ Preferred communication style: Simple, everyday language.
 Project Focus: Backend API for programmatic use, not web interface.
 Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, Imum Coeli.
 House System: Must use Whole Sign houses exclusively.
-Development Status: **PRODUCTION READY** - Accurate astronomical data confirmed.
+Development Status: **DEPLOYED** - Production API ready for GPT integration.
 Deployment Command: `python run_production.py` or `uvicorn run_production:app --host 0.0.0.0 --port 8000`
-API Documentation: http://localhost:8000/docs
+API Documentation: https://YOUR-REPLIT-URL.replit.app/docs
 Main Endpoint: POST /generate-chart
-Public API URL: http://localhost:8000 (when deployed)
+Public API URL: https://YOUR-REPLIT-URL.replit.app (deploy button clicked)
+GPT Integration: Complete specification provided in GPT_INTEGRATION_SPEC.md
 
 ## System Architecture
 

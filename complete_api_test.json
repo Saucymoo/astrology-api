@@ -1,1 +1,218 @@
-{"detail":"Failed to generate astrology chart: name 'astro_calc' is not defined"}
+{
+  "test_info": {
+    "date": "November 22, 1974",
+    "time": "19:10 (7:10 PM)",
+    "location": "Adelaide, Australia",
+    "coordinates": {
+      "latitude": -34.9285,
+      "longitude": 138.6007,
+      "timezone": "UTC+9.5"
+    },
+    "requested_house_system": "Whole Signs"
+  },
+  "swiss_ephemeris_results": {
+    "source": "Swiss Ephemeris v2.10.03",
+    "birth_data": {
+      "date": "November 22, 1974",
+      "time": "19:10 (7:10 PM)",
+      "location": "Adelaide, Australia",
+      "coordinates": {
+        "latitude": -34.9285,
+        "longitude": 138.6007,
+        "timezone": "UTC+9.5"
+      }
+    },
+    "house_system": "Whole Signs",
+    "ascendant": {
+      "sign": "Gemini",
+      "degree": 1.5901396485353416,
+      "exact_degree": "1\u00b035'24\""
+    },
+    "planets": [
+      {
+        "name": "Sun",
+        "sign": "Scorpio",
+        "degree": 29.706438126477707,
+        "house": 6,
+        "exact_degree": "29\u00b042'23\"",
+        "retrograde": false
+      },
+      {
+        "name": "Moon",
+        "sign": "Pisces",
+        "degree": 4.7001952440395485,
+        "house": 10,
+        "exact_degree": "4\u00b042'00\"",
+        "retrograde": false
+      },
+      {
+        "name": "Mercury",
+        "sign": "Scorpio",
+        "degree": 14.742059853712135,
+        "house": 6,
+        "exact_degree": "14\u00b044'31\"",
+        "retrograde": false
+      },
+      {
+        "name": "Venus",
+        "sign": "Sagittarius",
+        "degree": 3.6492678750764753,
+        "house": 7,
+        "exact_degree": "3\u00b038'57\"",
+        "retrograde": false
+      },
+      {
+        "name": "Mars",
+        "sign": "Scorpio",
+        "degree": 17.109797609623882,
+        "house": 6,
+        "exact_degree": "17\u00b006'35\"",
+        "retrograde": false
+      },
+      {
+        "name": "Jupiter",
+        "sign": "Pisces",
+        "degree": 8.590042388734503,
+        "house": 10,
+        "exact_degree": "8\u00b035'24\"",
+        "retrograde": false
+      },
+      {
+        "name": "Saturn",
+        "sign": "Cancer",
+        "degree": 18.469518827209697,
+        "house": 2,
+        "exact_degree": "18\u00b028'10\"",
+        "retrograde": false
+      },
+      {
+        "name": "Uranus",
+        "sign": "Scorpio",
+        "degree": 0.057358421185398356,
+        "house": 6,
+        "exact_degree": "0\u00b003'26\"",
+        "retrograde": false
+      },
+      {
+        "name": "Neptune",
+        "sign": "Sagittarius",
+        "degree": 8.9807193044484,
+        "house": 7,
+        "exact_degree": "8\u00b058'50\"",
+        "retrograde": false
+      },
+      {
+        "name": "Pluto",
+        "sign": "Libra",
+        "degree": 8.540752395777986,
+        "house": 5,
+        "exact_degree": "8\u00b032'26\"",
+        "retrograde": false
+      },
+      {
+        "name": "North Node",
+        "sign": "Sagittarius",
+        "degree": 10.339014586884929,
+        "house": 7,
+        "exact_degree": "10\u00b020'20\"",
+        "retrograde": false
+      },
+      {
+        "name": "South Node",
+        "sign": "Gemini",
+        "degree": 10.3390145868849,
+        "house": 1,
+        "exact_degree": "10\u00b020'20\"",
+        "retrograde": false
+      },
+      {
+        "name": "Chiron",
+        "sign": "Aries",
+        "degree": 20.0,
+        "house": 11,
+        "exact_degree": "20\u00b000'00\"",
+        "retrograde": false
+      }
+    ]
+  },
+  "external_api_results": {
+    "source": "External APIs",
+    "test_data": {
+      "date": "1974-11-22",
+      "time": "19:10",
+      "latitude": -34.9285,
+      "longitude": 138.6007,
+      "timezone": 9.5,
+      "house_system": "W"
+    },
+    "api_responses": [
+      {
+        "name": "Free Astrology API",
+        "url": "https://freeastrologyapi.com/api/houses",
+        "status_code": 404,
+        "headers": {
+          "connection": "close",
+          "x-powered-by": "PHP/8.2.28",
+          "content-type": "text/html; charset=UTF-8",
+          "content-length": "3179",
+          "content-encoding": "gzip",
+          "vary": "Accept-Encoding",
+          "date": "Sun, 03 Aug 2025 11:07:55 GMT",
+          "server": "LiteSpeed",
+          "platform": "hostinger",
+          "panel": "hpanel",
+          "content-security-policy": "upgrade-insecure-requests",
+          "alt-svc": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+        },
+        "response_text": "\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n      <!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-RVCEZ7FPZT\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-RVCEZ7FPZT');\n</script>\n\n<!-- Hotjar Tracking Code for my site -->\n<script>\n    (function(h,o,t,j,a,r){\n        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};\n        h._hjS",
+        "error": "Endpoint not found"
+      },
+      {
+        "name": "Free Astrology API (Chart)",
+        "url": "https://freeastrologyapi.com/api/chart",
+        "status_code": 404,
+        "headers": {
+          "connection": "close",
+          "x-powered-by": "PHP/8.2.28",
+          "content-type": "text/html; charset=UTF-8",
+          "content-length": "3179",
+          "content-encoding": "gzip",
+          "vary": "Accept-Encoding",
+          "date": "Sun, 03 Aug 2025 11:07:56 GMT",
+          "server": "LiteSpeed",
+          "platform": "hostinger",
+          "panel": "hpanel",
+          "content-security-policy": "upgrade-insecure-requests",
+          "alt-svc": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+        },
+        "response_text": "\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n      <!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-RVCEZ7FPZT\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-RVCEZ7FPZT');\n</script>\n\n<!-- Hotjar Tracking Code for my site -->\n<script>\n    (function(h,o,t,j,a,r){\n        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};\n        h._hjS",
+        "error": "Endpoint not found"
+      },
+      {
+        "name": "Free Astrology API (Planets)",
+        "url": "https://freeastrologyapi.com/api/planets",
+        "status_code": 404,
+        "headers": {
+          "connection": "close",
+          "x-powered-by": "PHP/8.2.28",
+          "content-type": "text/html; charset=UTF-8",
+          "content-length": "3179",
+          "content-encoding": "gzip",
+          "vary": "Accept-Encoding",
+          "date": "Sun, 03 Aug 2025 11:07:57 GMT",
+          "server": "LiteSpeed",
+          "platform": "hostinger",
+          "panel": "hpanel",
+          "content-security-policy": "upgrade-insecure-requests",
+          "alt-svc": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+        },
+        "response_text": "\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n      <!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-RVCEZ7FPZT\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-RVCEZ7FPZT');\n</script>\n\n<!-- Hotjar Tracking Code for my site -->\n<script>\n    (function(h,o,t,j,a,r){\n        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};\n        h._hjS",
+        "error": "Endpoint not found"
+      }
+    ]
+  },
+  "comparison_notes": {
+    "user_verification": "User previously confirmed Sun at 29\u00b042'23\" Scorpio is astronomically correct",
+    "purpose": "Compare both approaches for astronomical accuracy verification"
+  }
+}

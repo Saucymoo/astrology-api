@@ -48,8 +48,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize services
-astrology_service = MockAstrologyService()
+# Initialize services with explicit Whole Sign configuration
+try:
+    # Try to use real astrology service first
+    from services.astrology_service import AstrologyService
+    astrology_service = AstrologyService()
+    astrology_service.set_house_system("W")  # Ensure Whole Sign is set
+    logger.info("Using real AstrologyService with Whole Sign houses")
+except Exception as e:
+    # Fallback to mock service if real service fails
+    astrology_service = MockAstrologyService()
+    astrology_service.set_house_system("W")  # Ensure Whole Sign is set
+    logger.info(f"Using MockAstrologyService due to: {e}")
+
 geocoding_service = GeocodingService()
 
 
@@ -99,8 +110,9 @@ async def generate_astrology_chart(birth_info: BirthInfoRequest):
             if not birth_info.timezone:
                 birth_info.timezone = coordinates.get("timezone", 0)
         
-        # Generate astrology chart
-        logger.info("Calling astrology service...")
+        # Ensure Whole Sign house system before generating chart
+        astrology_service.set_house_system("W")
+        logger.info(f"Calling astrology service with house system: {astrology_service.get_house_system()}")
         raw_chart = await astrology_service.generate_chart(birth_info)
         
         # Convert to complete chart format with all required points

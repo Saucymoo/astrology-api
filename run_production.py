@@ -5,7 +5,7 @@ Simple production server runner for the Astrology Chart API.
 
 import asyncio
 import json
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
@@ -80,7 +80,10 @@ async def health():
 
 
 @app.post("/generate-chart")
-async def generate_chart(request: SimpleChartRequest):
+async def generate_chart(request: SimpleChartRequest,
+                         authorization: Optional[str] = Header(None)):
+    if authorization != "Bearer sk_lumen_vitae_2398abcd92lskj20v9":
+        raise HTTPException(status_code=401, detail="Unauthorized")
     """Generate natal chart - using our proven accurate calculations."""
 
     try:

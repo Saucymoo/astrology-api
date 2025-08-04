@@ -1,0 +1,731 @@
+{
+  "test_date": "2025-08-04T05:21:36.241170",
+  "famous_charts": [
+    {
+      "name": "Albert Einstein",
+      "expected_sun": "Pisces",
+      "actual_sun": "Pisces",
+      "correct": true,
+      "full_chart": {
+        "name": "Albert Einstein",
+        "birth_date": "1879-03-14",
+        "birth_time": "11:30",
+        "birth_location": "Ulm, Germany",
+        "coordinates": {
+          "latitude": 48.3984968,
+          "longitude": 9.9912458,
+          "timezone": 1
+        },
+        "house_system": "Whole Sign",
+        "ascendant": {
+          "sign": "Capricorn",
+          "degree": 1.9069674464038826,
+          "exact_degree": "1\u00b054'25\""
+        },
+        "midheaven": {
+          "sign": "Scorpio",
+          "degree": 3.5486097165591275,
+          "house": 11,
+          "exact_degree": "3\u00b032'54\""
+        },
+        "rising_sign": "Capricorn",
+        "sun_sign": "Pisces",
+        "moon_sign": "Sagittarius",
+        "placements": [
+          {
+            "planet": "Sun",
+            "sign": "Pisces",
+            "degree": 23.141141867108672,
+            "exact_degree": "23\u00b008'28\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Moon",
+            "sign": "Sagittarius",
+            "degree": 9.377074163929251,
+            "exact_degree": "9\u00b022'37\"",
+            "house": 12,
+            "retrograde": false
+          },
+          {
+            "planet": "Mercury",
+            "sign": "Aries",
+            "degree": 2.4246293615464336,
+            "exact_degree": "2\u00b025'28\"",
+            "house": 4,
+            "retrograde": false
+          },
+          {
+            "planet": "Venus",
+            "sign": "Aries",
+            "degree": 16.531593008763846,
+            "exact_degree": "16\u00b031'53\"",
+            "house": 4,
+            "retrograde": false
+          },
+          {
+            "planet": "Mars",
+            "sign": "Capricorn",
+            "degree": 26.64605720627651,
+            "exact_degree": "26\u00b038'45\"",
+            "house": 1,
+            "retrograde": false
+          },
+          {
+            "planet": "Jupiter",
+            "sign": "Aquarius",
+            "degree": 27.400288107361973,
+            "exact_degree": "27\u00b024'01\"",
+            "house": 2,
+            "retrograde": false
+          },
+          {
+            "planet": "Saturn",
+            "sign": "Aries",
+            "degree": 4.144349393488882,
+            "exact_degree": "4\u00b008'39\"",
+            "house": 4,
+            "retrograde": false
+          },
+          {
+            "planet": "Uranus",
+            "sign": "Virgo",
+            "degree": 1.3029769566352627,
+            "exact_degree": "1\u00b018'10\"",
+            "house": 9,
+            "retrograde": false
+          },
+          {
+            "planet": "Neptune",
+            "sign": "Taurus",
+            "degree": 7.861636427589389,
+            "exact_degree": "7\u00b051'41\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Pluto",
+            "sign": "Taurus",
+            "degree": 24.72091207212282,
+            "exact_degree": "24\u00b043'15\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "North Node",
+            "sign": "Aquarius",
+            "degree": 2.735982193395273,
+            "exact_degree": "2\u00b044'09\"",
+            "house": 2,
+            "retrograde": false
+          },
+          {
+            "planet": "South Node",
+            "sign": "Leo",
+            "degree": 2.735982193395273,
+            "exact_degree": "2\u00b044'09\"",
+            "house": 8,
+            "retrograde": false
+          },
+          {
+            "planet": "Chiron",
+            "sign": "Aries",
+            "degree": 20.0,
+            "exact_degree": "20\u00b000'00\"",
+            "house": 4,
+            "retrograde": false
+          }
+        ],
+        "generated_at": "2025-08-04T05:21:29.096305",
+        "source": "Swiss Ephemeris with Whole Sign Houses"
+      }
+    },
+    {
+      "name": "Winston Churchill",
+      "expected_sun": "Sagittarius",
+      "actual_sun": "Sagittarius",
+      "correct": true,
+      "full_chart": {
+        "name": "Winston Churchill",
+        "birth_date": "1874-11-30",
+        "birth_time": "01:30",
+        "birth_location": "Woodstock, UK",
+        "coordinates": {
+          "latitude": 51.8474887,
+          "longitude": -1.3545343,
+          "timezone": 0
+        },
+        "house_system": "Whole Sign",
+        "ascendant": {
+          "sign": "Gemini",
+          "degree": 9.440242287020851,
+          "exact_degree": "9\u00b026'24\""
+        },
+        "midheaven": {
+          "sign": "Aquarius",
+          "degree": 4.667088113013733,
+          "house": 9,
+          "exact_degree": "4\u00b040'01\""
+        },
+        "rising_sign": "Gemini",
+        "sun_sign": "Sagittarius",
+        "moon_sign": "Leo",
+        "placements": [
+          {
+            "planet": "Sun",
+            "sign": "Sagittarius",
+            "degree": 7.317929234611455,
+            "exact_degree": "7\u00b019'04\"",
+            "house": 7,
+            "retrograde": false
+          },
+          {
+            "planet": "Moon",
+            "sign": "Leo",
+            "degree": 24.603296643109104,
+            "exact_degree": "24\u00b036'11\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Mercury",
+            "sign": "Scorpio",
+            "degree": 17.278379207315822,
+            "exact_degree": "17\u00b016'42\"",
+            "house": 6,
+            "retrograde": false
+          },
+          {
+            "planet": "Venus",
+            "sign": "Sagittarius",
+            "degree": 22.20253450500013,
+            "exact_degree": "22\u00b012'09\"",
+            "house": 7,
+            "retrograde": false
+          },
+          {
+            "planet": "Mars",
+            "sign": "Libra",
+            "degree": 16.30763763992482,
+            "exact_degree": "16\u00b018'27\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Jupiter",
+            "sign": "Libra",
+            "degree": 23.494908180581035,
+            "exact_degree": "23\u00b029'41\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Saturn",
+            "sign": "Aquarius",
+            "degree": 9.56369722986011,
+            "exact_degree": "9\u00b033'49\"",
+            "house": 9,
+            "retrograde": false
+          },
+          {
+            "planet": "Uranus",
+            "sign": "Leo",
+            "degree": 15.232512061727277,
+            "exact_degree": "15\u00b013'57\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Neptune",
+            "sign": "Aries",
+            "degree": 28.441548669258335,
+            "exact_degree": "28\u00b026'29\"",
+            "house": 11,
+            "retrograde": false
+          },
+          {
+            "planet": "Pluto",
+            "sign": "Taurus",
+            "degree": 21.431464811552345,
+            "exact_degree": "21\u00b025'53\"",
+            "house": 12,
+            "retrograde": false
+          },
+          {
+            "planet": "North Node",
+            "sign": "Aries",
+            "degree": 25.85877708754903,
+            "exact_degree": "25\u00b051'31\"",
+            "house": 11,
+            "retrograde": false
+          },
+          {
+            "planet": "South Node",
+            "sign": "Libra",
+            "degree": 25.858777087549015,
+            "exact_degree": "25\u00b051'31\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Chiron",
+            "sign": "Aries",
+            "degree": 20.0,
+            "exact_degree": "20\u00b000'00\"",
+            "house": 11,
+            "retrograde": false
+          }
+        ],
+        "generated_at": "2025-08-04T05:21:30.210388",
+        "source": "Swiss Ephemeris with Whole Sign Houses"
+      }
+    },
+    {
+      "name": "John F. Kennedy",
+      "expected_sun": "Gemini",
+      "actual_sun": "Gemini",
+      "correct": true,
+      "full_chart": {
+        "name": "John F. Kennedy",
+        "birth_date": "1917-05-29",
+        "birth_time": "15:00",
+        "birth_location": "Brookline, MA, USA",
+        "coordinates": {
+          "latitude": 42.332918,
+          "longitude": -71.1187829,
+          "timezone": -5
+        },
+        "house_system": "Whole Sign",
+        "ascendant": {
+          "sign": "Pisces",
+          "degree": 7.997698143992977,
+          "exact_degree": "7\u00b059'51\""
+        },
+        "midheaven": {
+          "sign": "Sagittarius",
+          "degree": 18.554779242997824,
+          "house": 10,
+          "exact_degree": "18\u00b033'17\""
+        },
+        "rising_sign": "Pisces",
+        "sun_sign": "Gemini",
+        "moon_sign": "Virgo",
+        "placements": [
+          {
+            "planet": "Sun",
+            "sign": "Gemini",
+            "degree": 7.2642636846863695,
+            "exact_degree": "7\u00b015'51\"",
+            "house": 4,
+            "retrograde": false
+          },
+          {
+            "planet": "Moon",
+            "sign": "Virgo",
+            "degree": 9.979689678847876,
+            "exact_degree": "9\u00b058'46\"",
+            "house": 7,
+            "retrograde": false
+          },
+          {
+            "planet": "Mercury",
+            "sign": "Taurus",
+            "degree": 20.59240893234179,
+            "exact_degree": "20\u00b035'32\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Venus",
+            "sign": "Gemini",
+            "degree": 16.00293921953981,
+            "exact_degree": "16\u00b000'10\"",
+            "house": 4,
+            "retrograde": false
+          },
+          {
+            "planet": "Mars",
+            "sign": "Taurus",
+            "degree": 17.99074350375978,
+            "exact_degree": "17\u00b059'26\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Jupiter",
+            "sign": "Taurus",
+            "degree": 22.906450581753198,
+            "exact_degree": "22\u00b054'23\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Saturn",
+            "sign": "Cancer",
+            "degree": 27.10167019901546,
+            "exact_degree": "27\u00b006'06\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Uranus",
+            "sign": "Aquarius",
+            "degree": 23.718851262961607,
+            "exact_degree": "23\u00b043'07\"",
+            "house": 12,
+            "retrograde": false
+          },
+          {
+            "planet": "Neptune",
+            "sign": "Leo",
+            "degree": 2.6574496903484714,
+            "exact_degree": "2\u00b039'26\"",
+            "house": 6,
+            "retrograde": false
+          },
+          {
+            "planet": "Pluto",
+            "sign": "Cancer",
+            "degree": 3.255049804924667,
+            "exact_degree": "3\u00b015'18\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "North Node",
+            "sign": "Capricorn",
+            "degree": 11.253632154053719,
+            "exact_degree": "11\u00b015'13\"",
+            "house": 11,
+            "retrograde": false
+          },
+          {
+            "planet": "South Node",
+            "sign": "Cancer",
+            "degree": 11.253632154053719,
+            "exact_degree": "11\u00b015'13\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Chiron",
+            "sign": "Aries",
+            "degree": 20.0,
+            "exact_degree": "20\u00b000'00\"",
+            "house": 2,
+            "retrograde": false
+          }
+        ],
+        "generated_at": "2025-08-04T05:21:31.143142",
+        "source": "Swiss Ephemeris with Whole Sign Houses"
+      }
+    },
+    {
+      "name": "Princess Diana",
+      "expected_sun": "Cancer",
+      "actual_sun": "Cancer",
+      "correct": true,
+      "full_chart": {
+        "name": "Princess Diana",
+        "birth_date": "1961-07-01",
+        "birth_time": "19:45",
+        "birth_location": "Sandringham, UK",
+        "coordinates": {
+          "latitude": 52.8427652,
+          "longitude": 0.4318137,
+          "timezone": 0
+        },
+        "house_system": "Whole Sign",
+        "ascendant": {
+          "sign": "Virgo",
+          "degree": 18.506230770322787,
+          "exact_degree": "18\u00b030'22\""
+        },
+        "midheaven": {
+          "sign": "Gemini",
+          "degree": 14.712236359200006,
+          "house": 10,
+          "exact_degree": "14\u00b042'44\""
+        },
+        "rising_sign": "Virgo",
+        "sun_sign": "Cancer",
+        "moon_sign": "Aquarius",
+        "placements": [
+          {
+            "planet": "Sun",
+            "sign": "Cancer",
+            "degree": 9.325506318042542,
+            "exact_degree": "9\u00b019'31\"",
+            "house": 11,
+            "retrograde": false
+          },
+          {
+            "planet": "Moon",
+            "sign": "Aquarius",
+            "degree": 19.817092439807652,
+            "exact_degree": "19\u00b049'01\"",
+            "house": 6,
+            "retrograde": false
+          },
+          {
+            "planet": "Mercury",
+            "sign": "Cancer",
+            "degree": 3.3748307340514287,
+            "exact_degree": "3\u00b022'29\"",
+            "house": 11,
+            "retrograde": false
+          },
+          {
+            "planet": "Venus",
+            "sign": "Taurus",
+            "degree": 24.037844327288596,
+            "exact_degree": "24\u00b002'16\"",
+            "house": 9,
+            "retrograde": false
+          },
+          {
+            "planet": "Mars",
+            "sign": "Virgo",
+            "degree": 1.4364040199806425,
+            "exact_degree": "1\u00b026'11\"",
+            "house": 1,
+            "retrograde": false
+          },
+          {
+            "planet": "Jupiter",
+            "sign": "Aquarius",
+            "degree": 5.133821029983551,
+            "exact_degree": "5\u00b008'01\"",
+            "house": 6,
+            "retrograde": false
+          },
+          {
+            "planet": "Saturn",
+            "sign": "Capricorn",
+            "degree": 27.838102783029456,
+            "exact_degree": "27\u00b050'17\"",
+            "house": 5,
+            "retrograde": false
+          },
+          {
+            "planet": "Uranus",
+            "sign": "Leo",
+            "degree": 23.318644222313935,
+            "exact_degree": "23\u00b019'07\"",
+            "house": 12,
+            "retrograde": false
+          },
+          {
+            "planet": "Neptune",
+            "sign": "Scorpio",
+            "degree": 8.640121204625814,
+            "exact_degree": "8\u00b038'24\"",
+            "house": 3,
+            "retrograde": false
+          },
+          {
+            "planet": "Pluto",
+            "sign": "Virgo",
+            "degree": 6.036682526178936,
+            "exact_degree": "6\u00b002'12\"",
+            "house": 1,
+            "retrograde": false
+          },
+          {
+            "planet": "North Node",
+            "sign": "Leo",
+            "degree": 28.177916493107887,
+            "exact_degree": "28\u00b010'40\"",
+            "house": 12,
+            "retrograde": false
+          },
+          {
+            "planet": "South Node",
+            "sign": "Aquarius",
+            "degree": 28.177916493107887,
+            "exact_degree": "28\u00b010'40\"",
+            "house": 6,
+            "retrograde": false
+          },
+          {
+            "planet": "Chiron",
+            "sign": "Aries",
+            "degree": 20.0,
+            "exact_degree": "20\u00b000'00\"",
+            "house": 8,
+            "retrograde": false
+          }
+        ],
+        "generated_at": "2025-08-04T05:21:32.102802",
+        "source": "Swiss Ephemeris with Whole Sign Houses"
+      }
+    }
+  ],
+  "seasonal_tests": [
+    {
+      "test": "Spring Equinox Test",
+      "expected": "Aries",
+      "actual": "Aries",
+      "correct": true
+    },
+    {
+      "test": "Summer Solstice Test",
+      "expected": "Gemini",
+      "actual": "Gemini",
+      "correct": true
+    },
+    {
+      "test": "Autumn Equinox Test",
+      "expected": "Libra",
+      "actual": "Virgo",
+      "correct": false
+    },
+    {
+      "test": "Winter Solstice Test",
+      "expected": "Sagittarius",
+      "actual": "Sagittarius",
+      "correct": true
+    }
+  ],
+  "mia_chart_data": {
+    "name": "Mia Mitchell",
+    "birth_date": "1974-11-22",
+    "birth_time": "19:10",
+    "birth_location": "Adelaide, South Australia, Australia"
+  },
+  "mia_final_result": {
+    "name": "Mia Mitchell",
+    "birth_date": "1974-11-22",
+    "birth_time": "19:10",
+    "birth_location": "Adelaide, South Australia, Australia",
+    "coordinates": {
+      "latitude": -34.9281805,
+      "longitude": 138.5999312,
+      "timezone": 9
+    },
+    "house_system": "Whole Sign",
+    "ascendant": {
+      "sign": "Gemini",
+      "degree": 1.5896570663038787,
+      "exact_degree": "1\u00b035'22\""
+    },
+    "midheaven": {
+      "sign": "Pisces",
+      "degree": 13.285337729555636,
+      "house": 10,
+      "exact_degree": "13\u00b017'07\""
+    },
+    "rising_sign": "Gemini",
+    "sun_sign": "Scorpio",
+    "moon_sign": "Pisces",
+    "placements": [
+      {
+        "planet": "Sun",
+        "sign": "Scorpio",
+        "degree": 29.706438126477707,
+        "exact_degree": "29\u00b042'23\"",
+        "house": 6,
+        "retrograde": false
+      },
+      {
+        "planet": "Moon",
+        "sign": "Pisces",
+        "degree": 4.7001952440395485,
+        "exact_degree": "4\u00b042'00\"",
+        "house": 10,
+        "retrograde": false
+      },
+      {
+        "planet": "Mercury",
+        "sign": "Scorpio",
+        "degree": 14.742059853712135,
+        "exact_degree": "14\u00b044'31\"",
+        "house": 6,
+        "retrograde": false
+      },
+      {
+        "planet": "Venus",
+        "sign": "Sagittarius",
+        "degree": 3.6492678750764753,
+        "exact_degree": "3\u00b038'57\"",
+        "house": 7,
+        "retrograde": false
+      },
+      {
+        "planet": "Mars",
+        "sign": "Scorpio",
+        "degree": 17.109797609623882,
+        "exact_degree": "17\u00b006'35\"",
+        "house": 6,
+        "retrograde": false
+      },
+      {
+        "planet": "Jupiter",
+        "sign": "Pisces",
+        "degree": 8.590042388734503,
+        "exact_degree": "8\u00b035'24\"",
+        "house": 10,
+        "retrograde": false
+      },
+      {
+        "planet": "Saturn",
+        "sign": "Cancer",
+        "degree": 18.469518827209697,
+        "exact_degree": "18\u00b028'10\"",
+        "house": 2,
+        "retrograde": false
+      },
+      {
+        "planet": "Uranus",
+        "sign": "Scorpio",
+        "degree": 0.057358421185398356,
+        "exact_degree": "0\u00b003'26\"",
+        "house": 6,
+        "retrograde": false
+      },
+      {
+        "planet": "Neptune",
+        "sign": "Sagittarius",
+        "degree": 8.9807193044484,
+        "exact_degree": "8\u00b058'50\"",
+        "house": 7,
+        "retrograde": false
+      },
+      {
+        "planet": "Pluto",
+        "sign": "Libra",
+        "degree": 8.540752395777986,
+        "exact_degree": "8\u00b032'26\"",
+        "house": 5,
+        "retrograde": false
+      },
+      {
+        "planet": "North Node",
+        "sign": "Sagittarius",
+        "degree": 10.339014586884929,
+        "exact_degree": "10\u00b020'20\"",
+        "house": 7,
+        "retrograde": false
+      },
+      {
+        "planet": "South Node",
+        "sign": "Gemini",
+        "degree": 10.3390145868849,
+        "exact_degree": "10\u00b020'20\"",
+        "house": 1,
+        "retrograde": false
+      },
+      {
+        "planet": "Chiron",
+        "sign": "Aries",
+        "degree": 20.0,
+        "exact_degree": "20\u00b000'00\"",
+        "house": 11,
+        "retrograde": false
+      }
+    ],
+    "generated_at": "2025-08-04T05:21:37.466500",
+    "source": "Swiss Ephemeris with Whole Sign Houses"
+  }
+}

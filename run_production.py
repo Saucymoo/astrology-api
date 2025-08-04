@@ -9,6 +9,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 import uvicorn
 
 
@@ -18,6 +19,9 @@ class SimpleChartRequest(BaseModel):
     birth_date: str  # YYYY-MM-DD
     birth_time: str  # HH:MM
     birth_location: str
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    timezone_name: Optional[str] = None
 
 
 class SimpleChartResponse(BaseModel):
@@ -107,8 +111,9 @@ async def generate_chart(request: SimpleChartRequest):
             latitude=coordinates['latitude'],
             longitude=coordinates['longitude'],
             timezone=coordinates.get('timezone', 0),
-            timezone_name=request.
-            timezone_name  # ← Use directly from the request
+            timezone_name=request.timezone_name
+            or coordinates.get('timezone_name', "UTC")
+            # ← Use directly from the request
         )
 
         # Generate chart

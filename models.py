@@ -82,7 +82,7 @@ class BirthInfoRequest(BaseModel):
                 "location": "New York, NY, USA",
                 "latitude": 40.7128,
                 "longitude": -74.0060,
-                "timezone": -5
+                "timezone": -5,
                 "timezone_name": "America/New_York"
             }
         }

@@ -7,6 +7,7 @@ import swisseph as swe
 import logging
 from typing import Dict, List, Any
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import math
 from typing import Tuple
 from models import Midheaven  # Ensure this is defined in models.py
@@ -101,37 +102,27 @@ class AstrologyCalculationsService:
             raise Exception(f"Failed to generate astrology chart: {str(e)}")
 
     def _calculate_julian_day(self, birth_info: BirthInfoRequest) -> float:
-        """Calculate Julian day from birth information."""
+        """Calculate Julian day from birth information using precise timezone handling."""
         try:
-            # Parse validated birth date (YYYY-MM-DD)
-            date_parts = birth_info.date.split('-')
-            year = int(date_parts[0])
-            month = int(date_parts[1])
-            day = int(date_parts[2])
+            # Combine date and time into a single string and parse
+            local_dt = datetime.strptime(
+                f"{birth_info.date} {birth_info.time}", "%Y-%m-%d %H:%M")
 
-            # Parse time
-            time_parts = birth_info.time.split(':')
-            hour = int(time_parts[0])
-            minute = int(time_parts[1])
+            # Use the timezone name (e.g., "Australia/Adelaide") to convert to UTC
+            if not hasattr(birth_info,
+                           'timezone_name') or not birth_info.timezone_name:
+                raise Exception("Missing timezone_name in birth_info")
 
-            # Convert to decimal hours
-            decimal_hour = hour + minute / 60.0
+            tz = ZoneInfo(birth_info.timezone_name)
+            local_dt = local_dt.replace(tzinfo=tz)
+            utc_dt = local_dt.astimezone(ZoneInfo("UTC"))
 
-            # Adjust for timezone (convert to UTC)
-            if hasattr(birth_info, 'timezone') and birth_info.timezone:
-                decimal_hour -= birth_info.timezone
+            # Convert to decimal hour
+            decimal_hour = utc_dt.hour + utc_dt.minute / 60.0
 
-                # Handle day rollover
-                if decimal_hour < 0:
-                    decimal_hour += 24
-                    day -= 1
-                elif decimal_hour >= 24:
-                    decimal_hour -= 24
-                    day += 1
-
-            # Calculate Julian day
-            julian_day = swe.julday(year, month, day, decimal_hour,
-                                    swe.GREG_CAL)
+            # Calculate Julian day in UTC
+            julian_day = swe.julday(utc_dt.year, utc_dt.month, utc_dt.day,
+                                    decimal_hour, swe.GREG_CAL)
             return julian_day
 
         except Exception as e:

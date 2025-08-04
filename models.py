@@ -41,6 +41,9 @@ class BirthInfoRequest(BaseModel):
                                       ge=-12,
                                       le=14,
                                       description="Timezone offset in hours")
+    timezone_name: Optional[str] = Field(
+        default=None,
+        description="Timezone name in IANA format, e.g., 'Australia/Adelaide'")
 
     @validator('date')
     def validate_date(cls, v):
@@ -80,6 +83,7 @@ class BirthInfoRequest(BaseModel):
                 "latitude": 40.7128,
                 "longitude": -74.0060,
                 "timezone": -5
+                "timezone_name": "America/New_York"
             }
         }
 

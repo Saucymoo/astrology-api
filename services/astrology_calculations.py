@@ -267,9 +267,8 @@ class AstrologyCalculationsService:
             houses_data, ascmc = swe.houses(julian_day, latitude, longitude,
                                             b'W')
 
-            # Calculate true Ascendant degree manually (independent of house system)
-            asc_longitude = swe.ascendant(julian_day, birth_info.latitude,
-                                          birth_info.longitude)
+            # Get Ascendant from the ascmc array (already calculated by houses function)
+            asc_longitude = ascmc[0]  # Ascendant is the first element
 
             asc_sign_num = int(asc_longitude // 30) + 1
             asc_degree = asc_longitude % 30

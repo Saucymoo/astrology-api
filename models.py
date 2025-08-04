@@ -139,6 +139,16 @@ class Ascendant(BaseModel):
         json_schema_extra = {"example": {"sign": "Leo", "degree": 15.3}}
 
 
+class Midheaven(BaseModel):
+    """Model for the Midheaven (MC)."""
+
+    sign: str = Field(..., description="Midheaven zodiac sign")
+    degree: float = Field(..., ge=0, lt=360, description="Degree of Midheaven")
+
+    class Config:
+        json_schema_extra = {"example": {"sign": "Taurus", "degree": 21.4}}
+
+
 class AstrologyResponse(BaseModel):
     """Response model for astrology chart data."""
 

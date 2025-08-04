@@ -11,7 +11,7 @@ import math
 from typing import Tuple
 from models import Midheaven  # Ensure this is defined in models.py
 
-from models import BirthInfoRequest, AstrologyResponse, Planet, House, Ascendant
+from models import BirthInfoRequest, AstrologyResponse, Planet, House, Ascendant, Midheaven
 
 logger = logging.getLogger(__name__)
 

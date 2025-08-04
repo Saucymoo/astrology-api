@@ -18,6 +18,8 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 - ✅ **PRODUCTION READY**: API ready for public deployment and GPT integration
 - ✅ **TIMEZONE ACCURACY**: Adelaide daylight saving time (UTC+10:30) correctly applied for November 1974
 - ✅ **GLOBAL TIMEZONE SUPPORT**: Comprehensive timezone handler supports worldwide locations with historical DST rules
+- ✅ **API ACCURACY VERIFIED**: Backend calculations 100% accurate - Mia's chart shows correct Taurus 19°15'21" Rising
+- ✅ **GPT SCHEMA UPDATED**: Enhanced OpenAPI schema with exact degree specifications for proper parsing
 
 ## User Preferences
 

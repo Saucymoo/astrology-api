@@ -268,24 +268,26 @@ class AstrologyCalculationsService:
             longitude: float) -> Tuple[Ascendant, Midheaven]:
         """Calculate Ascendant and Midheaven using Swiss Ephemeris."""
         try:
-            # Use Whole Sign system ("W") to get ASC and MC from Swiss Ephemeris
-            houses_data, ascmc = swe.houses(julian_day, latitude, longitude,
-                                            b'W')
+            # Use Placidus system for exact angular calculations (most accurate for angles)
+            # Whole Sign uses these exact degrees but assigns entire signs to houses
+            houses_data, ascmc = swe.houses(julian_day, latitude, longitude, b'P')
 
-            # Get Ascendant from the ascmc array (already calculated by houses function)
-            asc_longitude = ascmc[0]  # Ascendant is the first element
+            # Get exact Ascendant degree
+            asc_longitude = ascmc[0]  # Ascendant - exact degree
 
             asc_sign_num = int(asc_longitude // 30) + 1
             asc_degree = asc_longitude % 30
             asc_sign_name = self.zodiac_signs[asc_sign_num - 1]
             ascendant = Ascendant(sign=asc_sign_name, degree=asc_degree)
 
-            # Midheaven (MC)
-            mc_longitude = ascmc[1]
+            # Get exact Midheaven degree
+            mc_longitude = ascmc[1]  # Midheaven - exact degree
             mc_sign_num = int(mc_longitude // 30) + 1
             mc_degree = mc_longitude % 30
             mc_sign_name = self.zodiac_signs[mc_sign_num - 1]
             midheaven = Midheaven(sign=mc_sign_name, degree=mc_degree)
+            
+            logger.info(f"Whole Sign angles - ASC: {asc_sign_name} {asc_degree:.2f}°, MC: {mc_sign_name} {mc_degree:.2f}°")
 
             return ascendant, midheaven
 

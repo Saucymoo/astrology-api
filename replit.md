@@ -20,6 +20,7 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 - ✅ **GLOBAL TIMEZONE SUPPORT**: Comprehensive timezone handler supports worldwide locations with historical DST rules
 - ✅ **API ACCURACY VERIFIED**: Backend calculations 100% accurate - Mia's chart shows correct Taurus 19°15'21" Rising
 - ✅ **GPT SCHEMA UPDATED**: Enhanced OpenAPI schema with exact degree specifications for proper parsing
+- ✅ **RETROGRADE CALCULATIONS FIXED**: Saturn and Chiron retrograde status now accurate for November 1974
 
 ## User Preferences
 

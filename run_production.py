@@ -150,7 +150,7 @@ async def generate_chart(request: SimpleChartRequest):
                 "exact_degree":
                 f"{int(degree)}°{int((degree % 1) * 60):02d}'{int(((degree % 1) * 60 % 1) * 60):02d}\"",
                 "house": house,
-                "retrograde": getattr(planet, 'retrograde', False)
+                "retrograde": getattr(planet, 'retro', False)
             }
             placements.append(placement)
 

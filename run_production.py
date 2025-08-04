@@ -167,6 +167,9 @@ async def generate_chart(request: SimpleChartRequest,
         mc_sign = raw_chart.midheaven.sign
         mc_degree = raw_chart.midheaven.degree
 
+        # Determine which Whole Sign house the Midheaven falls in
+        mc_house = whole_sign_houses.get(mc_sign, 0)
+
         response = {
             "name": request.name,
             "birth_date": request.birth_date,
@@ -191,6 +194,8 @@ async def generate_chart(request: SimpleChartRequest,
                 mc_sign,
                 "degree":
                 mc_degree,
+                "house":
+                mc_house,
                 "exact_degree":
                 f"{int(mc_degree)}°{int((mc_degree % 1) * 60):02d}'{int(((mc_degree % 1) * 60 % 1) * 60):02d}\""
             },

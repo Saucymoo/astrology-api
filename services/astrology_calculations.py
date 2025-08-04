@@ -257,9 +257,9 @@ class AstrologyCalculationsService:
             longitude: float) -> Tuple[Ascendant, Midheaven]:
         """Calculate Ascendant and Midheaven using Swiss Ephemeris."""
         try:
-            # Use Placidus to get both ASC and MC
+            # Use Whole Sign system ("W") to get ASC and MC from Swiss Ephemeris
             houses_data, ascmc = swe.houses(julian_day, latitude, longitude,
-                                            b'P')
+                                            b'W')
 
             # Ascendant
             asc_longitude = ascmc[0]

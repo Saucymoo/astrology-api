@@ -8,6 +8,8 @@ import logging
 from typing import Dict, List, Any
 from datetime import datetime
 import math
+from typing import Tuple
+from models import Midheaven  # Ensure this is defined in models.py
 
 from models import BirthInfoRequest, AstrologyResponse, Planet, House, Ascendant
 
@@ -71,10 +73,9 @@ class AstrologyCalculationsService:
                 # Add estimated Chiron
                 planets.append(self._add_estimated_chiron())
 
-            # Calculate ascendant
-            ascendant = self._calculate_ascendant(julian_day,
-                                                  birth_info.latitude,
-                                                  birth_info.longitude)
+            # Calculate Ascendant and Midheaven
+            ascendant, midheaven = self._calculate_ascendant_and_midheaven(
+                julian_day, birth_info.latitude, birth_info.longitude)
 
             # Calculate Whole Sign houses
             houses = self._calculate_whole_sign_houses(ascendant)
@@ -92,6 +93,7 @@ class AstrologyCalculationsService:
                                      planets=planets,
                                      houses=houses,
                                      ascendant=ascendant,
+                                     midheaven=midheaven,
                                      generated_at=datetime.now())
 
         except Exception as e:
@@ -259,24 +261,34 @@ class AstrologyCalculationsService:
                       house=1,
                       retro=False)
 
-    def _calculate_ascendant(self, julian_day: float, latitude: float,
-                             longitude: float) -> Ascendant:
-        """Calculate Ascendant using Swiss Ephemeris house calculation."""
+    def _calculate_ascendant_and_midheaven(
+            self, julian_day: float, latitude: float,
+            longitude: float) -> Tuple[Ascendant, Midheaven]:
+        """Calculate Ascendant and Midheaven using Swiss Ephemeris."""
         try:
-            # Use Whole Sign houses (W) for Ascendant and MC
+            # Use Placidus to get both ASC and MC
             houses_data, ascmc = swe.houses(julian_day, latitude, longitude,
-                                            b'W')
+                                            b'P')
 
+            # Ascendant
             asc_longitude = ascmc[0]
+            asc_sign_num = int(asc_longitude // 30) + 1
+            asc_degree = asc_longitude % 30
+            asc_sign_name = self.zodiac_signs[asc_sign_num - 1]
+            ascendant = Ascendant(sign=asc_sign_name, degree=asc_degree)
 
-            sign_num = int(asc_longitude // 30) + 1
-            degree = asc_longitude % 30
-            sign_name = self.zodiac_signs[sign_num - 1]
+            # Midheaven (MC)
+            mc_longitude = ascmc[1]
+            mc_sign_num = int(mc_longitude // 30) + 1
+            mc_degree = mc_longitude % 30
+            mc_sign_name = self.zodiac_signs[mc_sign_num - 1]
+            midheaven = Midheaven(sign=mc_sign_name, degree=mc_degree)
 
-            return Ascendant(sign=sign_name, degree=degree)
+            return ascendant, midheaven
 
         except Exception as e:
-            raise Exception(f"Failed to calculate Ascendant: {str(e)}")
+            raise Exception(
+                f"Failed to calculate Ascendant and Midheaven: {str(e)}")
 
     def _calculate_whole_sign_houses(self,
                                      ascendant: Ascendant) -> List[House]:

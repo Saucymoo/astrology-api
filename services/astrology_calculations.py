@@ -118,19 +118,28 @@ class AstrologyCalculationsService:
             hour = int(birth_info.time.split(':')[0])
             minute = int(birth_info.time.split(':')[1])
             
-            # Adelaide in November 1974 was using daylight saving time (UTC+10:30)
-            # South Australia introduced daylight saving in October 1971
-            decimal_local_time = hour + minute / 60.0
-            decimal_utc_time = decimal_local_time - 10.5  # Adelaide daylight saving offset
+            # Import and use timezone handler for accurate calculations
+            try:
+                from services.timezone_handler import timezone_handler
+                decimal_utc_time, timezone_info = timezone_handler.calculate_accurate_utc_time(
+                    birth_info.date, birth_info.time, birth_info.latitude, 
+                    birth_info.longitude, birth_info.location
+                )
+                utc_day = timezone_info['utc_day']
+                logger.info(f"Timezone: {timezone_handler.get_timezone_info_summary(timezone_info)}")
+            except ImportError:
+                # Fallback to Adelaide-specific calculation if timezone handler not available
+                decimal_local_time = hour + minute / 60.0
+                decimal_utc_time = decimal_local_time - 10.5  # Adelaide daylight saving offset
+                utc_day = day
+                if decimal_utc_time < 0:
+                    decimal_utc_time += 24
+                    utc_day -= 1
+                elif decimal_utc_time >= 24:
+                    decimal_utc_time -= 24
+                    utc_day += 1
             
-            # Handle day rollover
-            utc_day = day
-            if decimal_utc_time < 0:
-                decimal_utc_time += 24
-                utc_day -= 1
-            elif decimal_utc_time >= 24:
-                decimal_utc_time -= 24
-                utc_day += 1
+
 
             # Calculate Julian day in UTC
             julian_day = swe.julday(year, month, utc_day, decimal_utc_time, swe.GREG_CAL)

@@ -17,6 +17,7 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 - ✅ **SWISS EPHEMERIS ACCURACY**: All planetary positions astronomically verified
 - ✅ **PRODUCTION READY**: API ready for public deployment and GPT integration
 - ✅ **TIMEZONE ACCURACY**: Adelaide daylight saving time (UTC+10:30) correctly applied for November 1974
+- ✅ **GLOBAL TIMEZONE SUPPORT**: Comprehensive timezone handler supports worldwide locations with historical DST rules
 
 ## User Preferences
 

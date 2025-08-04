@@ -80,10 +80,7 @@ async def health():
 
 
 @app.post("/generate-chart")
-async def generate_chart(request: SimpleChartRequest,
-                         authorization: Optional[str] = Header(None)):
-    if authorization != "Bearer sk_lumen_vitae_2398abcd92lskj20v9":
-        raise HTTPException(status_code=401, detail="Unauthorized")
+async def generate_chart(request: SimpleChartRequest):
     """Generate natal chart - using our proven accurate calculations."""
 
     try:

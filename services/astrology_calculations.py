@@ -3,7 +3,13 @@ Reliable astrology calculations service using verified astronomical data.
 Based on confirmed Swiss Ephemeris calculations for accurate planetary positions.
 """
 
-import swisseph as swe
+try:
+    import swisseph as swe
+except ImportError:
+    try:
+        import pyswisseph as swe
+    except ImportError:
+        raise ImportError("Neither swisseph nor pyswisseph is available")
 import logging
 from typing import Dict, List, Any
 from datetime import datetime

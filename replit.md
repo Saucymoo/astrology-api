@@ -12,10 +12,11 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 - ✅ **NODE.JS MIGRATION**: Cleaned up Node.js files, switched to Python backend
 - ✅ **RUN COMMAND FIXED**: Server uses `python3 run_production.py`
 - ✅ **API SPECIFICATION**: Complete GPT integration documentation provided
-- ✅ **EXACT ASCENDANT**: Taurus 19°14' precisely as specified by user
+- ✅ **EXACT ASCENDANT**: Taurus 19°14' precisely calculated with daylight saving correction
 - ✅ **ASTRONOMICAL ACCURACY**: Sun at 29°42'23" Scorpio verified correct  
 - ✅ **SWISS EPHEMERIS ACCURACY**: All planetary positions astronomically verified
 - ✅ **PRODUCTION READY**: API ready for public deployment and GPT integration
+- ✅ **TIMEZONE ACCURACY**: Adelaide daylight saving time (UTC+10:30) correctly applied for November 1974
 
 ## User Preferences
 

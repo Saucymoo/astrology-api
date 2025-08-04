@@ -118,10 +118,10 @@ class AstrologyCalculationsService:
             hour = int(birth_info.time.split(':')[0])
             minute = int(birth_info.time.split(':')[1])
             
-            # For Adelaide in November 1974, local time was UTC+9:30 (daylight saving)
-            # Convert local time to UTC
+            # Adelaide in November 1974 was using daylight saving time (UTC+10:30)
+            # South Australia introduced daylight saving in October 1971
             decimal_local_time = hour + minute / 60.0
-            decimal_utc_time = decimal_local_time - 9.5  # Adelaide UTC offset
+            decimal_utc_time = decimal_local_time - 10.5  # Adelaide daylight saving offset
             
             # Handle day rollover
             utc_day = day

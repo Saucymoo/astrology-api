@@ -99,15 +99,17 @@ async def generate_chart(request: SimpleChartRequest):
             request.birth_location)
 
         # Create birth info
-        birth_info = BirthInfoRequest(name=request.name,
-                                      date=internal_date,
-                                      time=request.birth_time,
-                                      location=request.birth_location,
-                                      latitude=coordinates['latitude'],
-                                      longitude=coordinates['longitude'],
-                                      timezone=coordinates.get('timezone', 0),
-                                      timezone_name=coordinates.get(
-                                          'timezone_name', "UTC"))
+        birth_info = BirthInfoRequest(
+            name=request.name,
+            date=internal_date,
+            time=request.birth_time,
+            location=request.birth_location,
+            latitude=coordinates['latitude'],
+            longitude=coordinates['longitude'],
+            timezone=coordinates.get('timezone', 0),
+            timezone_name=request.
+            timezone_name  # ← Use directly from the request
+        )
 
         # Generate chart
         raw_chart = await astrology_service.generate_chart(birth_info)

@@ -20,7 +20,7 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Project Focus: Backend API for programmatic use, not web interface.
+Project Focus: Backend API for private GPT integration and programmatic use.
 Required Astrological Points: Sun, Rising, Moon, Venus, Mercury, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, North Node, South Node, Midheaven, Descendant, Imum Coeli.
 House System: Must use Whole Sign houses exclusively.
 Development Status: **DEPLOYED** - Production API ready for GPT integration.
@@ -28,7 +28,7 @@ Deployment Command: `python run_production.py` or `uvicorn run_production:app --
 API Documentation: https://YOUR-REPLIT-URL.replit.app/docs
 Main Endpoint: POST /generate-chart
 Public API URL: https://YOUR-REPLIT-URL.replit.app (deploy button clicked)
-GPT Integration: Complete specification provided in GPT_INTEGRATION_SPEC.md
+GPT Integration: Private GPT integration guide provided in PRIVATE_GPT_INTEGRATION.md
 
 ## System Architecture
 

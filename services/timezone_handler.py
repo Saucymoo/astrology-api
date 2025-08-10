@@ -33,8 +33,10 @@ class TimezoneHandler:
             'chicago': {'standard_offset': -6.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': -5.0},
             'denver': {'standard_offset': -7.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': -6.0},
             
-            # Europe
+            # Europe  
             'london': {'standard_offset': 0.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': 1.0},
+            'united_kingdom': {'standard_offset': 0.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': 1.0},
+            'england': {'standard_offset': 0.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': 1.0},
             'paris': {'standard_offset': 1.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': 2.0},
             'berlin': {'standard_offset': 1.0, 'dst_months': [3, 4, 5, 6, 7, 8, 9, 10], 'dst_offset': 2.0},
             'moscow': {'standard_offset': 3.0, 'dst_months': [], 'dst_offset': 3.0},
@@ -59,6 +61,9 @@ class TimezoneHandler:
             },
             'europe': {
                 'introduced': 1980, 'start_month': 3, 'end_month': 10
+            },
+            'uk': {
+                'introduced': 1916, 'start_month': 3, 'end_month': 10
             }
         }
 
@@ -176,6 +181,18 @@ class TimezoneHandler:
             'chicago': 'chicago',
             'denver': 'denver',
             'london': 'london',
+            'swindon': 'united_kingdom',
+            'manchester': 'united_kingdom', 
+            'birmingham': 'united_kingdom',
+            'glasgow': 'united_kingdom',
+            'edinburgh': 'united_kingdom',
+            'bristol': 'united_kingdom',
+            'liverpool': 'united_kingdom',
+            'united kingdom': 'united_kingdom',
+            'uk': 'united_kingdom',
+            'england': 'england',
+            'scotland': 'united_kingdom',
+            'wales': 'united_kingdom',
             'paris': 'paris',
             'berlin': 'berlin',
             'moscow': 'moscow',
@@ -198,6 +215,8 @@ class TimezoneHandler:
             return 'melbourne'
         elif 'western australia' in location_lower or 'wa' in location_lower:
             return 'perth'
+        elif 'united kingdom' in location_lower or ', uk' in location_lower or ', england' in location_lower:
+            return 'united_kingdom'
         
         return ""
 
@@ -236,8 +255,18 @@ class TimezoneHandler:
                     "dst_rule": "March to November (modern)"
                 }
         
+        # UK specific rules (introduced DST earlier than EU)
+        elif location_key in ['london', 'united_kingdom', 'england']:
+            if year >= 1916:  # UK introduced DST in 1916
+                dst_active = month in dst_months
+                dst_info = {
+                    "dst_introduced": 1916,
+                    "dst_active": dst_active,
+                    "dst_rule": "March to October (British Summer Time)"
+                }
+        
         # Europe specific rules
-        elif location_key in ['london', 'paris', 'berlin']:
+        elif location_key in ['paris', 'berlin']:
             if year >= 1980:  # Modern EU DST rules
                 dst_active = month in dst_months
                 dst_info = {

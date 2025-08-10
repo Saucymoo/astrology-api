@@ -197,8 +197,11 @@ async def generate_chart(request: SimpleChartRequest):
                 f"{int(mc_degree)}°{int((mc_degree % 1) * 60):02d}'{int(((mc_degree % 1) * 60 % 1) * 60):02d}\""
             },
             "rising_sign": rising_sign,
-            "sun_sign": sun_sign or "Unknown",
+            "risingSign": rising_sign,
+            "sun_sign": sun_sign or "Unknown", 
+            "sunSign": sun_sign or "Unknown",
             "moon_sign": moon_sign or "Unknown",
+            "moonSign": moon_sign or "Unknown",
             "placements": placements,
             "generated_at": datetime.now().isoformat(),
             "source": "Swiss Ephemeris with Whole Sign Houses"

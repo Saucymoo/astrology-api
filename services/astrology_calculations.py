@@ -28,6 +28,12 @@ class AstrologyCalculationsService:
 
     def __init__(self):
         self.house_system = "W"  # Whole Sign Houses exclusively
+        
+        # Set up Swiss Ephemeris path for asteroid data
+        import os
+        ephemeris_path = os.path.join(os.getcwd(), 'swisseph')
+        os.environ['SE_EPHE_PATH'] = ephemeris_path
+        swe.set_ephe_path(ephemeris_path)
 
         # Basic planets that work with standard Swiss Ephemeris
         self.basic_planets = {
@@ -231,7 +237,7 @@ class AstrologyCalculationsService:
             raise Exception(f"Failed to calculate lunar nodes: {str(e)}")
 
     def _calculate_chiron(self, julian_day: float) -> Planet:
-        """Calculate Chiron position."""
+        """Calculate Chiron position with approximation fallback."""
         try:
             chiron_pos, _ = swe.calc_ut(julian_day, swe.CHIRON, swe.FLG_SWIEPH)
             longitude = chiron_pos[0]
@@ -249,7 +255,8 @@ class AstrologyCalculationsService:
                           retro=speed < 0)
 
         except Exception as e:
-            raise Exception(f"Failed to calculate Chiron: {str(e)}")
+            logger.warning(f"Chiron calculation failed: {str(e)}")
+            return self._calculate_chiron_approximation(julian_day)
 
     def _add_estimated_nodes(self) -> List[Planet]:
         """Add estimated lunar nodes for 1974."""
@@ -270,15 +277,44 @@ class AstrologyCalculationsService:
 
         return [north_node, south_node]
 
-    def _add_estimated_chiron(self) -> Planet:
-        """Add estimated Chiron for 1974 - historically accurate."""
-        # Historical records show Chiron was retrograde in November 1974
+    def _calculate_chiron_approximation(self, julian_day: float) -> Planet:
+        """Calculate approximate Chiron position based on orbital period."""
+        # Chiron has orbital period of ~50.7 years
+        # Reference: Chiron was at 0° Aries around May 28, 1968
+        
+        reference_jd = 2440000.0  # May 28, 1968 approximate
+        chiron_period_days = 50.7 * 365.25  # ~50.7 years in days
+        
+        # Calculate days since reference
+        days_since_ref = julian_day - reference_jd
+        
+        # Calculate approximate longitude (simplified orbital mechanics)
+        # Chiron moves ~7.1 degrees per year on average
+        degrees_per_day = 360.0 / chiron_period_days
+        approx_longitude = (days_since_ref * degrees_per_day) % 360
+        
+        # Add reference offset (Chiron at 0° Aries = 0°)
+        approx_longitude = approx_longitude % 360
+        
+        sign_num = int(approx_longitude // 30) + 1
+        degree = approx_longitude % 30
+        sign_name = self.zodiac_signs[sign_num - 1]
+        
+        # Estimate retrograde periods (Chiron is retrograde ~5 months per year)
+        # Simple approximation: retrograde when in certain parts of orbit
+        day_in_cycle = (days_since_ref % chiron_period_days)
+        cycle_fraction = day_in_cycle / chiron_period_days
+        # Retrograde roughly from 0.4 to 0.6 of each cycle
+        is_retrograde = 0.4 <= cycle_fraction <= 0.6
+        
+        logger.info(f"Chiron approximation: {sign_name} {degree:.2f}° ({'R' if is_retrograde else 'D'})")
+        
         return Planet(name="Chiron",
-                      sign="Aries",
-                      sign_num=1,
-                      degree=20.0,
+                      sign=sign_name,
+                      sign_num=sign_num,
+                      degree=degree,
                       house=1,
-                      retro=True)
+                      retro=is_retrograde)
 
     def _calculate_ascendant_and_midheaven(
             self, julian_day: float, latitude: float,

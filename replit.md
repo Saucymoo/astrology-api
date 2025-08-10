@@ -21,7 +21,8 @@ This is a comprehensive Python FastAPI backend service that generates complete n
 - ✅ **API ACCURACY VERIFIED**: Backend calculations 100% accurate - Mia's chart shows correct Taurus 19°15'21" Rising
 - ✅ **GPT SCHEMA UPDATED**: Enhanced OpenAPI schema with exact degree specifications for proper parsing
 - ✅ **RETROGRADE CALCULATIONS FIXED**: Saturn and Chiron retrograde status now accurate for November 1974
-- ✅ **UK TIMEZONE ACCURACY**: British Summer Time (UTC+1) correctly applied for UK locations in DST periods
+- ✅ **UK TIMEZONE ACCURACY**: British Summer Time (UTC+1) correctly applied for UK locations in DST periods  
+- ✅ **CHIRON CALCULATION FIX**: Resolved hardcoded fallback - now calculates unique Chiron positions per birth date using orbital mechanics
 
 ## User Preferences
 

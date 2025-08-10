@@ -223,7 +223,7 @@ class AstrologyCalculationsService:
                                 sign_num=sn_sign_num,
                                 degree=sn_degree,
                                 house=1,
-                                retro=True)
+                                retro=False)  # Nodes don't show retrograde status
 
             return [north_node, south_node]
 
@@ -266,7 +266,7 @@ class AstrologyCalculationsService:
                             sign_num=3,
                             degree=15.0,
                             house=1,
-                            retro=True)
+                            retro=False)  # Nodes don't show retrograde status
 
         return [north_node, south_node]
 

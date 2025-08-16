@@ -1,0 +1,242 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Professional Astrology Chart API",
+    "description": "Generate comprehensive natal charts with Swiss Ephemeris precision for any birth location worldwide",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://astrology-api-13ov.onrender.com",
+      "description": "Production Astrology API Server"
+    }
+  ],
+  "paths": {
+    "/generate-chart": {
+      "post": {
+        "operationId": "generateNatalChart",
+        "summary": "Generate Complete Natal Chart",
+        "description": "Creates a comprehensive astrological natal chart with precise planetary positions, Rising sign, and house placements using Swiss Ephemeris calculations and Whole Sign house system",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "birth_date", "birth_time", "birth_location"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Full name of the person for the chart",
+                    "example": "John Smith"
+                  },
+                  "birth_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                    "description": "Birth date in YYYY-MM-DD format",
+                    "example": "1985-06-15"
+                  },
+                  "birth_time": {
+                    "type": "string",
+                    "pattern": "^\\d{2}:\\d{2}$",
+                    "description": "Birth time in HH:MM format (24-hour)",
+                    "example": "14:30"
+                  },
+                  "birth_location": {
+                    "type": "string",
+                    "description": "Birth location as City, Country or City, State, Country",
+                    "example": "London, United Kingdom"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated natal chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the person"
+                    },
+                    "birth_date": {
+                      "type": "string",
+                      "description": "Birth date"
+                    },
+                    "birth_time": {
+                      "type": "string", 
+                      "description": "Birth time"
+                    },
+                    "birth_location": {
+                      "type": "string",
+                      "description": "Birth location"
+                    },
+                    "risingSign": {
+                      "type": "string",
+                      "description": "Rising sign (Ascendant sign)",
+                      "enum": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+                    },
+                    "sunSign": {
+                      "type": "string", 
+                      "description": "Sun sign",
+                      "enum": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+                    },
+                    "moonSign": {
+                      "type": "string",
+                      "description": "Moon sign", 
+                      "enum": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+                    },
+                    "coordinates": {
+                      "type": "object",
+                      "properties": {
+                        "latitude": {
+                          "type": "number",
+                          "description": "Latitude coordinate"
+                        },
+                        "longitude": {
+                          "type": "number",
+                          "description": "Longitude coordinate"
+                        },
+                        "timezone": {
+                          "type": "number",
+                          "description": "Timezone offset"
+                        }
+                      }
+                    },
+                    "house_system": {
+                      "type": "string",
+                      "description": "House system used",
+                      "const": "Whole Sign"
+                    },
+                    "ascendant": {
+                      "type": "object",
+                      "properties": {
+                        "sign": {
+                          "type": "string",
+                          "description": "Ascendant sign"
+                        },
+                        "degree": {
+                          "type": "number",
+                          "description": "Exact degree position"
+                        },
+                        "exact_degree": {
+                          "type": "string",
+                          "description": "Exact degree in degrees°minutes'seconds\" format"
+                        }
+                      }
+                    },
+                    "midheaven": {
+                      "type": "object",
+                      "properties": {
+                        "sign": {
+                          "type": "string",
+                          "description": "Midheaven sign"
+                        },
+                        "degree": {
+                          "type": "number",
+                          "description": "Exact degree position"
+                        },
+                        "house": {
+                          "type": "integer",
+                          "description": "House number (always 10 for Midheaven)"
+                        },
+                        "exact_degree": {
+                          "type": "string",
+                          "description": "Exact degree in degrees°minutes'seconds\" format"
+                        }
+                      }
+                    },
+                    "placements": {
+                      "type": "array",
+                      "description": "All planetary placements and chart points",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "planet": {
+                            "type": "string",
+                            "description": "Name of the celestial body",
+                            "enum": ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Chiron", "North Node", "South Node"]
+                          },
+                          "sign": {
+                            "type": "string",
+                            "description": "Zodiac sign placement",
+                            "enum": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+                          },
+                          "degree": {
+                            "type": "number",
+                            "description": "Exact degree position (0-29.999)"
+                          },
+                          "exact_degree": {
+                            "type": "string",
+                            "description": "Exact degree in degrees°minutes'seconds\" format"
+                          },
+                          "house": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 12,
+                            "description": "Astrological house number (1-12)"
+                          },
+                          "retrograde": {
+                            "type": "boolean",
+                            "description": "Whether the planet is in retrograde motion"
+                          }
+                        }
+                      }
+                    },
+                    "generated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Timestamp when chart was generated"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "Calculation method used",
+                      "const": "Swiss Ephemeris with Whole Sign Houses"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "500": {
+            "description": "Server error during chart generation"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "checkAPIHealth",
+        "summary": "Check API Health",
+        "description": "Verify that the API service is running and operational",
+        "responses": {
+          "200": {
+            "description": "API is healthy and operational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "const": "healthy"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
